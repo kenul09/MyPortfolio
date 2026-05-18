@@ -1,0 +1,288 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #f8fbff;
+
+  background:
+    radial-gradient(circle at 20% 10%, rgba(40,130,255,0.16), transparent 18%),
+    radial-gradient(circle at 90% 15%, rgba(130,196,255,0.08), transparent 12%),
+    linear-gradient(180deg, #010409 0%, #020615 36%, #02040b 100%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 48px;
+
+  padding: 120px 48px 100px;
+
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* LEFT */
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-intro {
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+
+  color: #7dd3fc;
+
+  margin-bottom: 18px;
+}
+
+.hero-heading {
+  font-size: clamp(4rem, 8vw, 6.4rem);
+
+  line-height: 0.92;
+  font-weight: 900;
+
+  letter-spacing: -0.06em;
+
+  margin-bottom: 26px;
+}
+
+.hero-copy {
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+
+  color: rgba(245,248,255,0.82);
+
+  margin-bottom: 42px;
+}
+
+/* BUTTONS */
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 160px;
+
+  border-radius: 999px;
+
+  padding: 16px 32px;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background:
+    linear-gradient(
+      110deg,
+      #3474ff 0%,
+      #38a0ff 100%
+    );
+
+  color: #fff;
+
+  border: 1px solid rgba(103,178,255,0.24);
+
+  box-shadow:
+    0 18px 48px rgba(35,115,255,0.24);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.05);
+
+  color: #d7ecff;
+
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+/* RIGHT */
+
+.hero-right {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CAROUSEL */
+
+.hero-visual-frame {
+  position: relative;
+
+  width: 100%;
+  max-width: 720px;
+  height: 520px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 32px;
+
+  background: transparent;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(24px);
+
+  box-shadow:
+    0 0 25px rgba(255,255,255,0.08),
+    0 0 90px rgba(37,99,235,0.22),
+    0 25px 80px rgba(0,0,0,0.55);
+}
+
+.hero-visual-frame::before {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(255,255,255,0.06),
+      transparent 45%
+    );
+}
+
+.hero-swiper,
+.swiper,
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+}
+
+.hero-slide-image,
+.hero-video {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  display: block;
+  background: transparent;
+}
+
+/* PAGINATION */
+
+.swiper-pagination {
+  bottom: 18px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+
+  background: rgba(255,255,255,0.3);
+
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #4ea1ff;
+
+  transform: scale(1.2);
+
+  box-shadow:
+    0 0 12px rgba(78,161,255,0.6);
+}
+
+/* ANIMATION */
+
+.fade-in-up {
+  opacity: 0;
+
+  animation:
+    fadeInUp 0.8s ease forwards;
+
+  animation-delay: var(--delay);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .hero-inner {
+    flex-direction: column-reverse;
+
+    text-align: center;
+
+    padding: 100px 32px;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-visual-frame {
+    height: 460px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    padding: 90px 24px 70px;
+  }
+
+  .hero-heading {
+    font-size: clamp(2.8rem, 11vw, 4.2rem);
+  }
+
+  .hero-visual-frame {
+    height: 360px;
+  }
+}
