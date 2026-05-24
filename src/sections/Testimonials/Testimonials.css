@@ -2,18 +2,25 @@
   padding: 120px 0;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .test-header {
   text-align: center;
   margin-bottom: 60px;
 }
 
-.test-header .section-label { justify-content: center; }
+.test-header .section-label {
+  justify-content: center;
+}
 
 .test-title {
-  font-size: clamp(36px, 5vw, 52px);
+  font-size: clamp(28px, 5vw, 52px);
   font-weight: 800;
   letter-spacing: -0.04em;
   margin-bottom: 12px;
+  color: var(--text-primary);
 }
 
 .test-sub {
@@ -21,11 +28,19 @@
   color: var(--text-secondary);
 }
 
+/* =========================
+   GRID
+========================= */
+
 .test-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+
+/* =========================
+   CARD
+========================= */
 
 .test-card {
   background: rgba(10, 25, 47, 0.84);
@@ -35,12 +50,16 @@
   transition: var(--transition);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.17);
   backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
 }
 
 .test-card:hover {
   border-color: rgba(37, 99, 235, 0.3);
   transform: translateY(-5px);
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24), 0 0 25px rgba(37, 99, 235, 0.1);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.24),
+    0 0 25px rgba(37, 99, 235, 0.1);
 }
 
 .test-stars {
@@ -91,10 +110,69 @@
   color: var(--text-muted);
 }
 
+/* =========================
+   RESPONSIVE — TABLET
+========================= */
+
 @media (max-width: 1024px) {
-  .test-grid { grid-template-columns: repeat(2, 1fr); }
+  .test-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 }
 
+/* =========================
+   RESPONSIVE — MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 80px 0;
+  }
+
+  .test-header {
+    margin-bottom: 40px;
+  }
+
+  .test-sub {
+    font-size: 15px;
+  }
+
+  .test-card {
+    padding: 24px;
+  }
+
+  .test-text {
+    font-size: 14px;
+  }
+}
+
+/* =========================
+   RESPONSIVE — SMALL MOBILE
+========================= */
+
 @media (max-width: 600px) {
-  .test-grid { grid-template-columns: 1fr; }
+  .test-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonials {
+    padding: 60px 0;
+  }
+
+  .test-card {
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .test-name {
+    font-size: 14px;
+  }
+
+  .test-role {
+    font-size: 12px;
+  }
 }

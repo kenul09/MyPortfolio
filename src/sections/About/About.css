@@ -4,11 +4,50 @@
 
 .about-title {
   font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
   margin: 24px 0 16px;
+  color: var(--text-primary);
 }
 
 .about-text {
   max-width: 720px;
   line-height: 1.8;
   color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .about {
+    padding-top: 60px;
+  }
+
+  .about-title {
+    font-size: clamp(1.75rem, 7vw, 2.4rem);
+    margin: 20px 0 14px;
+  }
+
+  .about-text {
+    font-size: 15px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding-top: 48px;
+  }
+
+  .about-title {
+    font-size: clamp(1.5rem, 9vw, 2rem);
+  }
+
+  .about-text {
+    font-size: 14px;
+    line-height: 1.7;
+  }
 }
