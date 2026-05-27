@@ -1,4 +1,4 @@
-import './About.css'
+import './About.module.css'
 import { useLanguage } from '../../hooks'
 import { translations } from '../../translations'
 

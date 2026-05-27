@@ -1,0 +1,321 @@
+.projects {
+  position: relative;
+  padding: 120px 0;
+  background: transparent;
+  overflow: hidden;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.projects::before {
+  content: '';
+  position: absolute;
+  left: 8%;
+  top: 10%;
+  width: 35%;
+  height: 60%;
+  background: radial-gradient(circle at 40% 30%, var(--blue-glow), transparent 40%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.projectsHeader {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.projectsTitle {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.titleBlue {
+  color: var(--blue-bright);
+}
+
+.projectsSub {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.projectsHeaderActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.projectFilters {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 42px;
+}
+
+.filterBtn {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 22px;
+  color: var(--text-secondary);
+  background: var(--blue-glow-sm);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  white-space: nowrap;
+}
+
+.filterBtn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  background: var(--blue-glow);
+}
+
+.filterBtn.active {
+  background: var(--blue-primary);
+  border-color: var(--blue-primary);
+  color: #fff;
+  box-shadow: 0 0 25px var(--blue-glow);
+}
+
+/* =========================
+   GRID
+========================= */
+
+.projectsGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.projectCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition:
+    transform 0.4s ease,
+    background 0.3s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-10px);
+  border-color: var(--border-hover);
+  box-shadow:
+    var(--shadow-card),
+    0 0 30px var(--blue-glow);
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.projectImage {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.03);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.projectContent {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.projectContent h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.projectContent p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* =========================
+   TAG
+========================= */
+
+.projectTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 16px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.projectCard:hover .projectTag {
+  filter: brightness(1.1);
+}
+
+/* =========================
+   RESPONSIVE — TABLET
+========================= */
+
+@media (max-width: 992px) {
+  .projects {
+    padding: 100px 0;
+  }
+
+  .projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .projectsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .projectsHeaderActions {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .projectImage {
+    height: 220px;
+  }
+}
+
+/* =========================
+   RESPONSIVE — MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .projects {
+    padding: 80px 0;
+  }
+
+  .projectsTitle {
+    font-size: clamp(28px, 8vw, 40px);
+    margin-bottom: 14px;
+  }
+
+  .projectsSub {
+    font-size: 15px;
+  }
+
+  .projectFilters {
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .filterBtn {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .projectImage {
+    height: 200px;
+  }
+
+  .projectContent {
+    padding: 20px;
+  }
+
+  .projectContent h3 {
+    font-size: 20px;
+  }
+}
+
+/* =========================
+   RESPONSIVE — SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .projects {
+    padding: 60px 0;
+  }
+
+  .projectsHeaderActions {
+    gap: 8px;
+  }
+
+  .projectCard {
+    border-radius: 20px;
+  }
+
+  .projectImage {
+    height: 180px;
+  }
+
+  .projectContent {
+    padding: 16px;
+  }
+
+  .projectContent h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .projectContent p {
+    font-size: 14px;
+  }
+
+  .projectTag {
+    font-size: 11px;
+    padding: 6px 14px;
+    margin-bottom: 14px;
+  }
+}

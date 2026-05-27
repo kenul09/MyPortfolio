@@ -1,7 +1,19 @@
-import './Footer.css'
+import styles from './Footer.module.css'
 import { useLanguage } from '../../../hooks'
 import { translations } from '../../../translations'
 import useSmoothScroll from '../../../hooks/useSmoothScroll'
+
+import {
+  FiPhone,
+  FiMail,
+  FiInstagram,
+  FiGithub,
+  FiLinkedin,
+  FiDribbble,
+  FiTwitter,
+} from 'react-icons/fi'
+
+import { SiBehance } from 'react-icons/si'
 
 export default function Footer() {
   const { language } = useLanguage()
@@ -9,21 +21,17 @@ export default function Footer() {
   const { scrollTo } = useSmoothScroll()
 
   return (
-    <footer className="footer section">
+    <footer className={`section ${styles.footer}`}>
 
-      <div
-        className="footer-big-text"
-        aria-hidden="true"
-      >
+      <div className={styles.footerBigText} aria-hidden="true">
         SKWEB
       </div>
 
-      <div className="container footer-inner">
+      <div className={`container ${styles.footerInner}`}>
 
         {/* LEFT */}
-        <div className="footer-left">
-
-          <h3 className="footer-cta-title">
+        <div className={styles.footerLeft}>
+          <h3 className={styles.footerCtaTitle}>
             {t.footer.ctaTitle}
           </h3>
 
@@ -33,190 +41,145 @@ export default function Footer() {
           >
             {t.footer.button}
           </button>
-
         </div>
 
         {/* RIGHT */}
-        <div className="footer-links">
+        <div className={styles.footerLinks}>
 
           {/* QUICK LINKS */}
-          <div className="footer-col">
-
-            <p className="footer-col-title">
+          <div className={styles.footerCol}>
+            <p className={styles.footerColTitle}>
               {t.footer.quickLinksTitle}
             </p>
 
-            {[
-              'about',
-              'services',
-              'projects',
-              'contact',
-            ].map((key) => (
+            {['about', 'services', 'projects', 'contact'].map((key) => (
               <button
                 key={key}
-                className="footer-link"
+                className={styles.footerLink}
                 onClick={() => scrollTo(key)}
               >
                 {t.navbar[key]}
               </button>
             ))}
-
           </div>
 
           {/* CONTACT */}
-          <div className="footer-col">
-
-            <p className="footer-col-title">
+          <div className={styles.footerCol}>
+            <p className={styles.footerColTitle}>
               {t.footer.contactTitle}
             </p>
 
-            {/* PHONE */}
-            <a
-              href="tel:+994503417069"
-              className="footer-contact-item"
-            >
-              <span className="contact-icon">
-                📞
-              </span>
-
+            <a href="tel:+994503417069" className={styles.footerContactItem}>
+              <FiPhone className={styles.contactIcon} />
               +994 50 341 70 69
             </a>
 
-            {/* EMAIL */}
-            <a
-              href="mailto:kenul94@mail.ru"
-              className="footer-contact-item"
-            >
-              <span className="contact-icon">
-                ✉️
-              </span>
-
+            <a href="mailto:kenul94@mail.ru" className={styles.footerContactItem}>
+              <FiMail className={styles.contactIcon} />
               kenul94@mail.ru
             </a>
 
-            {/* INSTAGRAM */}
             <a
               href="https://instagram.com/s.k_web"
               target="_blank"
               rel="noreferrer"
-              className="footer-contact-item"
+              className={styles.footerContactItem}
             >
-              <span className="contact-icon">
-                📷
-              </span>
-
+              <FiInstagram className={styles.contactIcon} />
               @s.k_web
             </a>
 
-            {/* GITHUB */}
             <a
               href="https://github.com/YOUR_GITHUB"
               target="_blank"
               rel="noreferrer"
-              className="footer-contact-item"
+              className={styles.footerContactItem}
             >
-              <span className="contact-icon">
-                💻
-              </span>
-
+              <FiGithub className={styles.contactIcon} />
               GitHub
             </a>
 
-            {/* LINKEDIN */}
             <a
               href="https://linkedin.com/in/YOUR_LINKEDIN"
               target="_blank"
               rel="noreferrer"
-              className="footer-contact-item"
+              className={styles.footerContactItem}
             >
-              <span className="contact-icon">
-                🔗
-              </span>
-
+              <FiLinkedin className={styles.contactIcon} />
               LinkedIn
             </a>
 
-            {/* BEHANCE */}
             <a
               href="https://behance.net/YOUR_BEHANCE"
               target="_blank"
               rel="noreferrer"
-              className="footer-contact-item"
+              className={styles.footerContactItem}
             >
-              <span className="contact-icon">
-                🎨
-              </span>
-
+              <SiBehance className={styles.contactIcon} />
               Behance
             </a>
 
           </div>
-
         </div>
-
       </div>
 
       {/* BOTTOM */}
-      <div className="footer-bottom container">
+      <div className={`container ${styles.footerBottom}`}>
+        <p>{t.footer.bottomText}</p>
 
-        <p>
-          {t.footer.bottomText}
-        </p>
+        <div className={styles.footerSocials}>
 
-        <div className="footer-socials">
-
-          {/* LINKEDIN */}
           <a
             href="https://linkedin.com/in/YOUR_LINKEDIN"
             target="_blank"
             rel="noreferrer"
-            className="social-btn"
+            className={styles.socialBtn}
+            aria-label="LinkedIn"
           >
-            in
+            <FiLinkedin />
           </a>
 
-          {/* BEHANCE */}
           <a
             href="https://behance.net/YOUR_BEHANCE"
             target="_blank"
             rel="noreferrer"
-            className="social-btn"
+            className={styles.socialBtn}
+            aria-label="Behance"
           >
-            Be
+            <SiBehance />
           </a>
 
-          {/* GITHUB */}
           <a
             href="https://github.com/YOUR_GITHUB"
             target="_blank"
             rel="noreferrer"
-            className="social-btn"
+            className={styles.socialBtn}
+            aria-label="GitHub"
           >
-            Gh
+            <FiGithub />
           </a>
 
-          {/* DRIBBBLE */}
           <a
             href="https://dribbble.com/YOUR_DRIBBBLE"
             target="_blank"
             rel="noreferrer"
-            className="social-btn"
+            className={styles.socialBtn}
+            aria-label="Dribbble"
           >
-            Dr
+            <FiDribbble />
           </a>
 
-          {/* TWITTER / X */}
           <a
             href="https://x.com/YOUR_USERNAME"
             target="_blank"
             rel="noreferrer"
-            className="social-btn"
+            className={styles.socialBtn}
+            aria-label="Twitter"
           >
-            X
+            <FiTwitter />
           </a>
 
         </div>
-
       </div>
 
     </footer>

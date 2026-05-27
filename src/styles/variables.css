@@ -1,41 +1,51 @@
+/* ─── DARK MODE (default) ─── */
 :root {
-  --bg-primary:    #0A192F;
-  --bg-secondary:  #0D1B2E;
-  --bg-card:       #0F2240;
-  --blue-primary:  #1976D2;
-  --blue-bright:   #2196F3;
-  --blue-dark:     #0D47A1;
-  --blue-glow:     rgba(25, 118, 210, 0.25);
-  --blue-glow-sm:  rgba(25, 118, 210, 0.12);
-  --text-primary:  #F5F8FF;
-  --text-secondary:#A8B8CC;
-  --text-muted:    #5A7090;
-  --border:        rgba(25, 118, 210, 0.18);
-  --border-hover:  rgba(25, 118, 210, 0.45);
-  --radius-sm:     8px;
-  --radius-md:     14px;
-  --radius-lg:     22px;
-  --font:          'Plus Jakarta Sans', sans-serif;
-  --transition:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-primary:     #081b2f;
+  --bg-secondary:   #0d2742;
+  --bg-card:        #102d4d;
+
+  --blue-primary:   #4da3ff;
+  --blue-bright:    #74bbff;
+  --blue-dark:      #2d7fd6;
+  --blue-glow:      rgba(77, 163, 255, 0.22);
+  --blue-glow-sm:   rgba(77, 163, 255, 0.10);
+
+  --text-primary:   #f4f8ff;
+  --text-secondary: #b8cbe0;
+  --text-muted:     #7f99b5;
+
+  --border:         rgba(77, 163, 255, 0.18);
+  --border-hover:   rgba(77, 163, 255, 0.38);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --font:       'Plus Jakarta Sans', sans-serif;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ─── LIGHT MODE ─── */
 [data-theme="light"] {
-  --bg-primary:    #FFFFFF;
-  --bg-secondary:  #F8FAFC;
-  --bg-card:       #FFFFFF;
-  --blue-primary:  #1976D2;
-  --blue-bright:   #2196F3;
-  --blue-dark:     #0D47A1;
-  --blue-glow:     rgba(25, 118, 210, 0.25);
-  --blue-glow-sm:  rgba(25, 118, 210, 0.12);
-  --text-primary:  #0A192F;
-  --text-secondary:#475569;
-  --text-muted:    #64748B;
-  --border:        rgba(25, 118, 210, 0.18);
-  --border-hover:  rgba(25, 118, 210, 0.45);
-  --radius-sm:     8px;
-  --radius-md:     14px;
-  --radius-lg:     22px;
-  --font:          'Plus Jakarta Sans', sans-serif;
-  --transition:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-primary:     #eef8ff;
+  --bg-secondary:   #f7fbff;
+  --bg-card:        #ffffff;
+
+  --blue-primary:   #1976d2;
+  --blue-bright:    #2196f3;
+  --blue-dark:      #1565c0;
+  --blue-glow:      rgba(25, 118, 210, 0.18);
+  --blue-glow-sm:   rgba(25, 118, 210, 0.08);
+
+  --text-primary:   #0a1930;
+  --text-secondary: #42556b;
+  --text-muted:     #6c7f95;
+
+  --border:         rgba(25, 118, 210, 0.14);
+  --border-hover:   rgba(25, 118, 210, 0.30);
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  22px;
+  --font:       'Plus Jakarta Sans', sans-serif;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

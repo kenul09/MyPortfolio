@@ -1,0 +1,20 @@
+.about {
+  padding-top: 80px;
+  color: var(--text-primary);
+  transition: color var(--transition);
+}
+
+.about-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 24px 0 16px;
+  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.about-text {
+  max-width: 720px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-size: 16px;
+}

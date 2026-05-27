@@ -1,8 +1,7 @@
-
 import { useLanguage } from '../../hooks'
 import { translations } from '../../translations'
 
-import './SKWEBShowcase.css'
+import styles from './SKWEBShowcase.module.css'
 
 import showcaseVideo from '../../assets/videos/hero.mov'
 
@@ -12,36 +11,29 @@ export default function SKWEBShowcase() {
 
   return (
     <section
-      className="section skweb-showcase"
+      className={`section ${styles.skwebShowcase}`}
       id="responsiveness"
     >
-      <div className="container showcase-grid">
-
-        <div className="showcase-header">
-
-          <div className="showcase-labels">
-
-            <span className="section-pill">
+      <div className={`container ${styles.showcaseGrid}`}>
+        <div className={styles.showcaseHeader}>
+          <div className={styles.showcaseLabels}>
+            <span className={styles.sectionPill}>
               {t.showcase.brand}
             </span>
 
-            <span className="section-pill secondary">
+            <span className={`${styles.sectionPill} ${styles.sectionPillSecondary}`}>
               {t.showcase.feature}
             </span>
-
           </div>
 
-          <p className="showcase-lead">
+          <p className={styles.showcaseLead}>
             {t.showcase.description}
           </p>
-
         </div>
 
-        {/* VIDEO */}
-        <div className="showcase-video-wrapper">
-
+        <div className={styles.showcaseVideoWrapper}>
           <video
-            className="showcase-video"
+            className={styles.showcaseVideo}
             autoPlay
             muted
             loop
@@ -49,17 +41,12 @@ export default function SKWEBShowcase() {
           >
             <source
               src={showcaseVideo}
-              type="video/mp4"
+              type="video/quicktime"
             />
-
             Your browser does not support the video tag.
-
           </video>
-
         </div>
-
       </div>
     </section>
   )
 }
-

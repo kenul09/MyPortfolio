@@ -12,7 +12,7 @@ import LanguageSwitcher from '../../common/LanguageSwitcher'
 import styles from './Navbar.module.css'
 
 /* ── Constants ── */
-const NAV_LINKS = ['about', 'responsiveness', 'services', 'projects', 'contact']
+const NAV_LINKS = ['about', 'responsiveness', 'services', 'projects', 'testimonials', 'contact']
 const SCROLL_THRESHOLD = 40
 const MOBILE_BREAKPOINT = 1024
 
@@ -41,12 +41,12 @@ export default function Navbar({ toggleTheme, theme }) {
   }, [isMobile])
 
   const handleScrollTo = (section) => {
-    scrollToSection(section)
-    setMenuOpen(false)
-  }
+  scrollToSection(section)
+  setMenuOpen(false)
+}
 
-  const themeLabel = theme === 'dark' ? t.theme.lightMode : t.theme.darkMode
-  const themeEmoji = theme === 'dark' ? '🌙' : '☀️'
+const themeLabel = theme === 'dark' ? t.theme.lightMode : t.theme.darkMode
+const themeEmoji = theme === 'dark' ? '☀️' : '🌙'
 
   return (
     <nav

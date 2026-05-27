@@ -1,0 +1,203 @@
+.skwebShowcase {
+  position: relative;
+  padding: 120px 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.skwebShowcase::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, var(--blue-glow), transparent 20%),
+    radial-gradient(circle at 80% 30%, var(--blue-glow-sm), transparent 25%);
+  pointer-events: none;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.showcaseGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.showcaseHeader {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.showcaseLabels {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.sectionPill {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--blue-glow-sm);
+  color: var(--blue-bright);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.sectionPillSecondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.showcaseLead {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.showcaseVideoWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  isolation: isolate;
+}
+
+.showcaseVideoWrapper::before {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, var(--blue-glow), transparent 70%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.showcaseVideo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: block;
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  box-shadow:
+    var(--shadow-card),
+    0 0 40px var(--blue-glow);
+  object-fit: cover;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* =========================
+   RESPONSIVE — TABLET
+========================= */
+
+@media (max-width: 1024px) {
+  .showcaseGrid {
+    gap: 48px;
+  }
+
+  .showcaseVideoWrapper::before {
+    inset: -24px;
+  }
+}
+
+/* =========================
+   RESPONSIVE — MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .skwebShowcase {
+    padding: 80px 0;
+  }
+
+  .showcaseGrid {
+    gap: 40px;
+  }
+
+  .showcaseHeader {
+    padding: 0 16px;
+  }
+
+  .showcaseLead {
+    font-size: 16px;
+  }
+
+  .showcaseLabels {
+    gap: 10px;
+  }
+
+  .sectionPill {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .showcaseVideoWrapper {
+    padding: 0 16px;
+  }
+
+  .showcaseVideo {
+    border-radius: 20px;
+  }
+
+  .showcaseVideoWrapper::before {
+    inset: -16px;
+    filter: blur(50px);
+  }
+}
+
+/* =========================
+   RESPONSIVE — SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .skwebShowcase {
+    padding: 60px 0;
+  }
+
+  .showcaseGrid {
+    gap: 32px;
+  }
+
+  .showcaseLead {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .showcaseVideoWrapper {
+    padding: 0 12px;
+  }
+
+  .showcaseVideo {
+    border-radius: 16px;
+  }
+}

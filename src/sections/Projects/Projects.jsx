@@ -4,7 +4,7 @@ import { useLanguage } from '../../hooks'
 import useSmoothScroll from '../../hooks/useSmoothScroll'
 import { translations } from '../../translations'
 
-import './Projects.css'
+import styles from './Projects.module.css'
 
 export default function Projects() {
   const { language } = useLanguage()
@@ -17,8 +17,8 @@ export default function Projects() {
   ========================= */
 
   const filters = [
-    { key: 'all',    label: t.projects.filters.all },
-    { key: 'uiux',  label: t.projects.filters.uiux },
+    { key: 'all',     label: t.projects.filters.all },
+    { key: 'uiux',   label: t.projects.filters.uiux },
     { key: 'webdev', label: t.projects.filters.webdev },
   ]
 
@@ -32,26 +32,26 @@ export default function Projects() {
   }, [filter, t.projects.cards])
 
   return (
-    <section className="projects section" id="projects">
+    <section className={`section ${styles.projects}`} id="projects">
       <div className="container">
 
         {/* HEADER */}
-        <div className="projects-header">
+        <div className={styles.projectsHeader}>
           <div>
             <span className="section-label">
               {t.projects.sectionLabel}
             </span>
 
-            <h2 className="projects-title">
+            <h2 className={styles.projectsTitle}>
               {t.projects.titleTop}
               <br />
               {t.projects.titleBottom}{' '}
-              <span className="title-blue">
+              <span className={styles.titleBlue}>
                 {t.projects.titleAccent}
               </span>
             </h2>
 
-            <p className="projects-sub">
+            <p className={styles.projectsSub}>
               {t.projects.sub.map((line, index) => (
                 <span key={index}>
                   {line}
@@ -62,7 +62,7 @@ export default function Projects() {
           </div>
 
           {/* ACTION BUTTONS */}
-          <div className="projects-header-actions">
+          <div className={styles.projectsHeaderActions}>
             <button
               className="btn-primary"
               onClick={() => scrollToSection('projects')}
@@ -81,11 +81,11 @@ export default function Projects() {
         </div>
 
         {/* FILTERS */}
-        <div className="project-filters" role="tablist">
+        <div className={styles.projectFilters} role="tablist">
           {filters.map((item) => (
             <button
               key={item.key}
-              className={`filter-btn ${filter === item.key ? 'active' : ''}`}
+              className={`${styles.filterBtn} ${filter === item.key ? styles.active : ''}`}
               onClick={() => setFilter(item.key)}
               role="tab"
               aria-selected={filter === item.key}
@@ -96,24 +96,24 @@ export default function Projects() {
         </div>
 
         {/* PROJECTS GRID */}
-        <div className="projects-grid">
+        <div className={styles.projectsGrid}>
           {filteredProjects.map((project, index) => (
             <a
               key={project.title + index}
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="project-card"
+              className={styles.projectCard}
             >
               <img
                 src={project.img}
                 alt={project.title}
-                className="project-image"
+                className={styles.projectImage}
               />
 
-              <div className="project-content">
+              <div className={styles.projectContent}>
                 <span
-                  className="project-tag"
+                  className={styles.projectTag}
                   style={{ background: project.color }}
                 >
                   {t.projects.tags[project.tag]}
