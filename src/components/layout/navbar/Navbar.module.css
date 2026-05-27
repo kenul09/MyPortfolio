@@ -1,8 +1,8 @@
 /* ============================================
-   NAVBAR COMPONENT - CSS MODULES
+   NAVBAR — CSS MODULE
    ============================================ */
 
-/* Base Navbar Container */
+/* ── Base Container ── */
 .navbar {
   position: fixed;
   top: 0;
@@ -11,10 +11,8 @@
   z-index: 100;
   padding: 20px 48px;
   transition: var(--transition);
-  backdrop-filter: blur(10px);
 }
 
-/* Navbar with scroll effect - adds background and border */
 .navbar.scrolled {
   background: rgba(10, 25, 47, 0.85);
   backdrop-filter: blur(20px);
@@ -23,15 +21,12 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Light theme scrolled state */
 [data-theme="light"] .navbar.scrolled {
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* ============================================
-   INNER CONTAINER LAYOUT
-   ============================================ */
+/* ── Inner Layout ── */
 .navInner {
   max-width: 1250px;
   margin: 0 auto;
@@ -42,9 +37,7 @@
   gap: 24px;
 }
 
-/* ============================================
-   LOGO SECTION
-   ============================================ */
+/* ── Logo ── */
 .navLogo {
   font-size: 22px;
   font-weight: 700;
@@ -52,9 +45,9 @@
   letter-spacing: -0.02em;
   text-decoration: none;
   z-index: 20;
-  transition: color 0.3s ease;
-  white-space: nowrap;
   flex-shrink: 0;
+  white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .navLogo:hover {
@@ -66,9 +59,7 @@
   font-weight: 800;
 }
 
-/* ============================================
-   DESKTOP NAVIGATION LINKS
-   ============================================ */
+/* ── Desktop Nav Links ── */
 .navLinks {
   position: absolute;
   left: 50%;
@@ -76,10 +67,10 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 8px 14px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 8px 14px;
   backdrop-filter: blur(12px);
   list-style: none;
   margin: 0;
@@ -96,7 +87,6 @@
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
 }
 
 .navLink:hover {
@@ -105,7 +95,6 @@
   transform: translateY(-2px);
 }
 
-/* Active link state */
 .navLink.active {
   background: #ffffff;
   color: #0a192f;
@@ -120,9 +109,18 @@
   box-shadow: 0 4px 18px rgba(10, 25, 47, 0.15);
 }
 
-/* ============================================
-   RIGHT NAVIGATION SECTION
-   ============================================ */
+/* ── Desktop Only (hidden on mobile) ── */
+.desktopOnly {
+  display: flex;
+}
+
+@media (max-width: 1024px) {
+  .desktopOnly {
+    display: none;
+  }
+}
+
+/* ── Right Section ── */
 .navRight {
   display: flex;
   align-items: center;
@@ -131,9 +129,7 @@
   flex-shrink: 0;
 }
 
-/* ============================================
-   THEME TOGGLE BUTTON
-   ============================================ */
+/* ── Theme Toggle ── */
 .themeToggle {
   width: 46px;
   height: 46px;
@@ -146,10 +142,10 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(12px);
-  padding: 0;
   flex-shrink: 0;
+  padding: 0;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .themeToggle:hover {
@@ -171,19 +167,11 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1);   }
 }
 
-/* ============================================
-   HAMBURGER MENU BUTTON
-   ============================================ */
+/* ── Hamburger Button ── */
 .burgerMenu {
   display: none;
   flex-direction: column;
@@ -205,23 +193,11 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hamburger animation when open */
-.burgerLine.open:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
+.burgerLine.open:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burgerLine.open:nth-child(2) { opacity: 0; width: 0; }
+.burgerLine.open:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.burgerLine.open:nth-child(2) {
-  opacity: 0;
-  width: 0;
-}
-
-.burgerLine.open:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ============================================
-   MOBILE MENU
-   ============================================ */
+/* ── Mobile Menu ── */
 .mobileMenu {
   display: none;
   flex-direction: column;
@@ -230,18 +206,17 @@
   background: rgba(10, 25, 47, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+  list-style: none;
+  margin: 0;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  list-style: none;
-  margin: 0;
 }
 
 [data-theme="light"] .mobileMenu {
   background: rgba(255, 255, 255, 0.95);
 }
 
-/* Mobile menu open state */
 .mobileMenu.open {
   max-height: 500px;
 }
@@ -249,6 +224,7 @@
 .mobileLink {
   background: none;
   border: none;
+  border-bottom: 1px solid var(--border);
   color: var(--text-secondary);
   font-family: var(--font);
   font-size: 16px;
@@ -256,9 +232,8 @@
   padding: 12px 0;
   text-align: left;
   cursor: pointer;
-  border-bottom: 1px solid var(--border);
-  transition: all 0.3s ease;
   width: 100%;
+  transition: all 0.3s ease;
 }
 
 .mobileLink:hover {
@@ -276,14 +251,14 @@
   border-radius: 14px;
   padding: 12px 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
   font-size: 16px;
   font-family: var(--font);
+  font-weight: 500;
   color: var(--text-primary);
   width: 100%;
   text-align: center;
-  font-weight: 500;
   margin-top: 8px;
+  transition: all 0.3s ease;
 }
 
 .mobileThemeToggle:hover {
@@ -296,10 +271,10 @@
 }
 
 /* ============================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE
    ============================================ */
 
-/* Tablet and Below */
+/* Tablet & Mobile — hide desktop nav, show burger */
 @media (max-width: 1024px) {
   .navLinks {
     display: none;
@@ -310,77 +285,31 @@
     display: flex;
   }
 
-  .navbar {
-    padding: 16px 24px;
-  }
-
-  .navbar.scrolled {
-    padding: 12px 24px;
-  }
-
-  .mobileMenu {
-    padding: 16px 24px 20px;
-  }
-
-  .navRight {
-    gap: 10px;
-  }
+  .navbar         { padding: 16px 24px; }
+  .navbar.scrolled { padding: 12px 24px; }
+  .mobileMenu      { padding: 16px 24px 20px; }
+  .navRight        { gap: 10px; }
 }
 
-/* Small Mobile Devices */
+/* Small Mobile */
 @media (max-width: 480px) {
-  .navbar {
-    padding: 14px 16px;
-  }
+  .navbar          { padding: 14px 16px; }
+  .navbar.scrolled { padding: 10px 16px; }
 
-  .navbar.scrolled {
-    padding: 10px 16px;
-  }
+  .navLogo  { font-size: 18px; }
+  .navInner { gap: 12px; }
+  .navRight { gap: 8px; }
 
-  .navLogo {
-    font-size: 18px;
-  }
+  .themeToggle { width: 40px; height: 40px; font-size: 16px; }
+  .burgerLine  { width: 20px; }
 
-  .navInner {
-    gap: 12px;
-  }
-
-  .navRight {
-    gap: 8px;
-  }
-
-  .themeToggle {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
-
-  .burgerLine {
-    width: 20px;
-  }
-
-  .mobileMenu {
-    padding: 12px 16px 16px;
-  }
-
-  .mobileLink {
-    font-size: 14px;
-    padding: 10px 0;
-  }
-
-  .mobileThemeToggle {
-    padding: 10px 16px;
-    font-size: 14px;
-  }
+  .mobileMenu         { padding: 12px 16px 16px; }
+  .mobileLink         { font-size: 14px; padding: 10px 0; }
+  .mobileThemeToggle  { padding: 10px 16px; font-size: 14px; }
 }
 
 /* Large Desktop */
 @media (min-width: 1440px) {
-  .navInner {
-    padding: 0 20px;
-  }
-
-  .navLink {
-    padding: 12px 24px;
-  }
+  .navInner { padding: 0 20px; }
+  .navLink  { padding: 12px 24px; }
 }

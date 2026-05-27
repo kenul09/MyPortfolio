@@ -59,18 +59,47 @@
   box-shadow: 0 4px 18px rgba(37, 99, 235, 0.5);
 }
 
-/* Mobile styles */
+/* =========================
+   RESPONSIVE — TABLET
+========================= */
+
+@media (max-width: 1024px) {
+  .lang-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+}
+
+/* =========================
+   RESPONSIVE — MOBILE NAV
+========================= */
+
 @media (max-width: 900px) {
   .language-switcher {
-    flex-direction: column;
-    gap: 6px;
+    flex-direction: row;
+    gap: 8px;
     width: 100%;
   }
 
   .lang-btn {
-    width: 100%;
+    flex: 1;
+    width: auto;
     height: 48px;
-    font-size: 16px;
+    font-size: 15px;
     border-radius: 12px;
+  }
+}
+
+/* =========================
+   RESPONSIVE — SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .lang-btn {
+    height: 44px;
+    font-size: 14px;
+    border-radius: 10px;
   }
 }
