@@ -3,7 +3,7 @@ import { translations } from '../../translations'
 
 import styles from './SKWEBShowcase.module.css'
 
-import showcaseVideo from '../../assets/videos/hero.mov'
+import showcaseVideo from '../../assets/videos/hero.mp4'
 
 export default function SKWEBShowcase() {
   const { language } = useLanguage()
@@ -15,6 +15,7 @@ export default function SKWEBShowcase() {
       id="responsiveness"
     >
       <div className={`container ${styles.showcaseGrid}`}>
+
         <div className={styles.showcaseHeader}>
           <div className={styles.showcaseLabels}>
             <span className={styles.sectionPill}>
@@ -38,14 +39,16 @@ export default function SKWEBShowcase() {
             muted
             loop
             playsInline
+            preload="auto"
           >
             <source
               src={showcaseVideo}
-              type="video/quicktime"
+              type="video/mp4"
             />
             Your browser does not support the video tag.
           </video>
         </div>
+
       </div>
     </section>
   )
