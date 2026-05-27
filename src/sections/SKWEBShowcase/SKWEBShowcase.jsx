@@ -5,6 +5,7 @@ import styles from './SKWEBShowcase.module.css'
 
 import showcaseVideo from '../../assets/videos/hero.mp4'
 
+
 export default function SKWEBShowcase() {
   const { language } = useLanguage()
   const t = translations[language]
