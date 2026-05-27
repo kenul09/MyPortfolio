@@ -1,15 +1,12 @@
-
 import { useRef } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper/modules'
-
 import 'swiper/css'
 import 'swiper/css/pagination'
 
 import useMountAnimation from '../../hooks/useMountAnimation'
 import useSmoothScroll from '../../hooks/useSmoothScroll'
-
 import { useLanguage } from '../../hooks'
 import { translations } from '../../translations'
 
@@ -17,122 +14,75 @@ import slide1 from '../../assets/images/slide1.png'
 import slide2 from '../../assets/images/slide2.png'
 import slide3 from '../../assets/images/slide3.png'
 
-import './Hero.css'
+import styles from './Hero.module.css'
+
+const SLIDES = [slide1, slide2, slide3]
+
+const SWIPER_CONFIG = {
+  modules: [Pagination, Autoplay],
+  slidesPerView: 1,
+  loop: true,
+  autoplay: { delay: 3000, disableOnInteraction: false },
+  pagination: { clickable: true },
+}
 
 export default function Hero() {
   const sectionRef = useRef(null)
-
   useMountAnimation(sectionRef)
 
   const { scrollToSection } = useSmoothScroll()
   const { language } = useLanguage()
-
   const t = translations[language]
 
-  const slides = [
-    slide1,
-    slide2,
-    slide3,
-  ]
-
-  const delay = (time) => ({
-    '--delay': time,
-  })
+  const delay = (time) => ({ '--delay': time })
 
   return (
-    <section
-      ref={sectionRef}
-      className="hero"
-      id="hero"
-    >
-      <div className="hero-inner">
+    <section ref={sectionRef} className={styles.hero} id="hero">
+      <div className={styles.heroInner}>
 
-        {/* LEFT */}
-        <div className="hero-content">
+        {/* LEFT — Content */}
+        <div className={styles.heroContent}>
 
-          <p
-            className="hero-intro fade-in-up"
-            style={delay('0.2s')}
-          >
+          <p className={`${styles.heroIntro} ${styles.fadeInUp}`} style={delay('0.2s')}>
             {t.heroTitle}
           </p>
 
-          <h1
-            className="hero-heading fade-in-up"
-            style={delay('0.4s')}
-          >
+          <h1 className={`${styles.heroHeading} ${styles.fadeInUp}`} style={delay('0.4s')}>
             Konul Samadova
           </h1>
 
-          <p
-            className="hero-copy fade-in-up"
-            style={delay('0.6s')}
-          >
+          <p className={`${styles.heroCopy} ${styles.fadeInUp}`} style={delay('0.6s')}>
             {t.heroSubtitle}
           </p>
 
-          <div
-            className="hero-actions fade-in-up"
-            style={delay('0.8s')}
-          >
-
-            <button
-              className="btn-primary"
-              onClick={() => scrollToSection('contact')}
-            >
+          <div className={`${styles.heroActions} ${styles.fadeInUp}`} style={delay('0.8s')}>
+            <button className={styles.btnPrimary} onClick={() => scrollToSection('contact')}>
               {t.startProject}
             </button>
-
-            <button
-              className="btn-ghost"
-              onClick={() => scrollToSection('projects')}
-            >
+            <button className={styles.btnGhost} onClick={() => scrollToSection('projects')}>
               {t.viewWorks}
             </button>
-
           </div>
+
         </div>
 
-        {/* RIGHT */}
-        <div
-          className="hero-right fade-in-up"
-          style={delay('1s')}
-        >
+        {/* RIGHT — Visual */}
+        <div className={`${styles.heroRight} ${styles.fadeInUp}`} style={delay('1s')}>
+          <div className={styles.heroVisualFrame}>
 
-          <div className="hero-visual-frame">
-
-            <Swiper
-              modules={[Pagination, Autoplay]}
-              slidesPerView={1}
-              loop={true}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                clickable: true,
-              }}
-              className="hero-swiper"
-            >
-
-              {slides.map((slide, index) => (
+            <Swiper {...SWIPER_CONFIG} className={styles.heroSwiper}>
+              {SLIDES.map((slide, index) => (
                 <SwiperSlide key={index}>
-
                   <img
                     src={slide}
                     alt={`Slide ${index + 1}`}
-                    className="hero-slide-image"
+                    className={styles.heroSlideImage}
                   />
-
                 </SwiperSlide>
               ))}
-
             </Swiper>
 
-            <div className="hero-visual-lens"></div>
-
           </div>
-
         </div>
 
       </div>
