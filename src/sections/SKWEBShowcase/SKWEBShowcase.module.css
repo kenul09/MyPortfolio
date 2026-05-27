@@ -1,3 +1,8 @@
+/* ============================================
+   SKWEB SHOWCASE — CSS MODULE
+   UI/UX Standards: 8pt Grid + Video Showcase
+   ============================================ */
+
 .skwebShowcase {
   position: relative;
   padding: 120px 0;
@@ -26,7 +31,7 @@
 .showcaseGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 60px;
+  gap: 64px;
   position: relative;
   z-index: 1;
 }
@@ -45,25 +50,32 @@
 .showcaseLabels {
   display: flex;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   margin-bottom: 24px;
   flex-wrap: wrap;
 }
 
 .sectionPill {
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 999px;
   background: var(--blue-glow-sm);
   color: var(--blue-bright);
   border: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   transition:
     background 0.3s ease,
     color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.sectionPill:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  background: var(--blue-glow);
 }
 
 .sectionPillSecondary {
@@ -73,9 +85,12 @@
 }
 
 .showcaseLead {
-  font-size: 18px;
-  line-height: 1.8;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75;
   color: var(--text-secondary);
+  letter-spacing: -0.005em;
+  max-width: 620px;
+  margin: 0 auto;
 }
 
 /* =========================
@@ -106,7 +121,7 @@
   z-index: 1;
   width: 100%;
   display: block;
-  border-radius: 28px;
+  border-radius: 24px;
   border: 1px solid var(--border);
   box-shadow:
     var(--shadow-card),
@@ -114,30 +129,56 @@
   object-fit: cover;
   transition:
     border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease,
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* =========================
-   RESPONSIVE — TABLET
-========================= */
+.showcaseVideo:hover {
+  border-color: var(--border-hover);
+  box-shadow:
+    var(--shadow-card),
+    0 0 60px var(--blue-glow);
+}
+
+/* ============================================
+   RESPONSIVE — TABLET (1024px)
+   ============================================ */
 
 @media (max-width: 1024px) {
+  .skwebShowcase {
+    padding: 96px 0;
+  }
+
   .showcaseGrid {
     gap: 48px;
   }
 
+  .showcaseHeader {
+    max-width: 680px;
+  }
+
+  .showcaseLead {
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.7;
+  }
+
   .showcaseVideoWrapper::before {
-    inset: -24px;
+    inset: -32px;
+    filter: blur(70px);
+  }
+
+  .showcaseVideo {
+    border-radius: 22px;
   }
 }
 
-/* =========================
-   RESPONSIVE — MOBILE
-========================= */
+/* ============================================
+   RESPONSIVE — MOBILE (768px)
+   ============================================ */
 
 @media (max-width: 768px) {
   .skwebShowcase {
-    padding: 80px 0;
+    padding: 72px 0;
   }
 
   .showcaseGrid {
@@ -145,56 +186,79 @@
   }
 
   .showcaseHeader {
-    padding: 0 16px;
-  }
-
-  .showcaseLead {
-    font-size: 16px;
+    padding: 0 20px;
   }
 
   .showcaseLabels {
     gap: 10px;
+    margin-bottom: 20px;
   }
 
   .sectionPill {
     font-size: 12px;
-    padding: 8px 16px;
+    padding: 8px 18px;
+    letter-spacing: 0.1em;
+  }
+
+  .showcaseLead {
+    font-size: 1rem; /* 16px */
+    line-height: 1.7;
   }
 
   .showcaseVideoWrapper {
-    padding: 0 16px;
+    padding: 0 20px;
+  }
+
+  .showcaseVideoWrapper::before {
+    inset: -20px;
+    filter: blur(50px);
   }
 
   .showcaseVideo {
     border-radius: 20px;
   }
-
-  .showcaseVideoWrapper::before {
-    inset: -16px;
-    filter: blur(50px);
-  }
 }
 
-/* =========================
-   RESPONSIVE — SMALL MOBILE
-========================= */
+/* ============================================
+   RESPONSIVE — SMALL MOBILE (480px)
+   ============================================ */
 
 @media (max-width: 480px) {
   .skwebShowcase {
-    padding: 60px 0;
+    padding: 56px 0;
   }
 
   .showcaseGrid {
     gap: 32px;
   }
 
+  .showcaseHeader {
+    padding: 0 16px;
+  }
+
+  .showcaseLabels {
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .sectionPill {
+    font-size: 11px;
+    padding: 7px 16px;
+    letter-spacing: 0.08em;
+  }
+
   .showcaseLead {
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.65;
   }
 
   .showcaseVideoWrapper {
-    padding: 0 12px;
+    padding: 0 16px;
+  }
+
+  .showcaseVideoWrapper::before {
+    inset: -16px;
+    filter: blur(40px);
   }
 
   .showcaseVideo {

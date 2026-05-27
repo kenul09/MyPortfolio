@@ -1,3 +1,8 @@
+/* ============================================
+   FOOTER SECTION — CSS MODULE
+   UI/UX Standards: 8pt Grid + Footer Best Practices
+   ============================================ */
+
 .footer {
   position: relative;
   background: linear-gradient(
@@ -7,7 +12,7 @@
   );
   border-top: 1px solid var(--border);
   overflow: hidden;
-  padding-top: 90px;
+  padding-top: 96px;
   color: var(--text-primary);
   transition:
     background 0.3s ease,
@@ -24,7 +29,7 @@
   bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: clamp(100px, 18vw, 240px);
+  font-size: clamp(6rem, 18vw, 15rem);
   font-weight: 900;
   letter-spacing: -0.05em;
   background: linear-gradient(
@@ -34,10 +39,12 @@
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
   line-height: 1;
+  z-index: 0;
 }
 
 /* =========================
@@ -48,20 +55,20 @@
   display: flex;
   justify-content: space-between;
   gap: 80px;
-  margin-bottom: 70px;
+  margin-bottom: 72px;
   position: relative;
   z-index: 2;
 }
 
 .footerLeft {
-  max-width: 420px;
+  max-width: 440px;
 }
 
 .footerCtaTitle {
-  font-size: clamp(34px, 5vw, 62px);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   margin-bottom: 32px;
   color: var(--text-primary);
 }
@@ -72,22 +79,23 @@
 
 .footerLinks {
   display: flex;
-  gap: 90px;
+  gap: 80px;
 }
 
 .footerCol {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  min-width: 140px;
 }
 
 .footerColTitle {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--blue-bright);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 /* =========================
@@ -98,12 +106,14 @@
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  font-size: 16px;
+  font-size: 15px;
   font-family: inherit;
   cursor: pointer;
   text-align: left;
   transition: 0.3s ease;
   padding: 0;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
 }
 
 .footerLink:hover {
@@ -122,7 +132,9 @@
   color: var(--text-secondary);
   text-decoration: none;
   transition: 0.3s ease;
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
 }
 
 .footerContactItem:hover {
@@ -153,16 +165,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 26px;
+  padding-top: 28px;
   padding-bottom: 32px;
   border-top: 1px solid var(--border);
   position: relative;
   z-index: 2;
+  gap: 24px;
 }
 
 .footerBottom p {
   color: var(--text-muted);
   font-size: 14px;
+  line-height: 1.5;
 }
 
 /* =========================
@@ -172,13 +186,13 @@
 .footerSocials {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .socialBtn {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   backdrop-filter: blur(10px);
@@ -187,8 +201,8 @@
   justify-content: center;
   color: #fff;
   text-decoration: none;
-  font-size: 18px;
-  transition: 0.3s ease;
+  font-size: 16px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -199,6 +213,7 @@
   position: relative;
   z-index: 1;
   color: #fff;
+  transition: 0.3s ease;
 }
 
 .socialBtn::before {
@@ -211,7 +226,7 @@
     transparent
   );
   opacity: 0;
-  transition: 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .socialBtn:hover::before {
@@ -219,7 +234,7 @@
 }
 
 .socialBtn:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   border-color: var(--border-hover);
   color: #fff;
   box-shadow:
@@ -227,54 +242,198 @@
     0 0 20px var(--blue-glow-sm);
 }
 
-/* =========================
-   RESPONSIVE — TABLET
-========================= */
+.socialBtn:hover svg {
+  transform: scale(1.1);
+}
+
+/* ============================================
+   RESPONSIVE — TABLET (1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .footer {
+    padding-top: 80px;
+  }
+
+  .footerInner {
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footerLinks {
+    gap: 64px;
+  }
+
+  .footerCtaTitle {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 24px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET → MOBILE (992px)
+   ============================================ */
 
 @media (max-width: 992px) {
   .footerInner {
     flex-direction: column;
-    gap: 50px;
+    gap: 56px;
+    margin-bottom: 56px;
+  }
+
+  .footerLeft {
+    max-width: 100%;
   }
 
   .footerLinks {
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 48px;
   }
 }
 
-/* =========================
-   RESPONSIVE — MOBILE
-========================= */
+/* ============================================
+   RESPONSIVE — MOBILE (768px)
+   ============================================ */
 
 @media (max-width: 768px) {
   .footer {
-    padding-top: 70px;
+    padding-top: 64px;
+  }
+
+  .footerInner {
+    gap: 48px;
+    margin-bottom: 48px;
   }
 
   .footerCtaTitle {
-    font-size: 42px;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .footerLinks {
+    gap: 40px;
+  }
+
+  .footerCol {
+    min-width: 120px;
+    gap: 12px;
+  }
+
+  .footerColTitle {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .footerLink,
+  .footerContactItem {
+    font-size: 14px;
   }
 
   .footerBottom {
     flex-direction: column;
     gap: 20px;
     text-align: center;
+    padding-top: 24px;
+    padding-bottom: 28px;
+  }
+
+  .footerBottom p {
+    font-size: 13px;
   }
 
   .footerSocials {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 10px;
   }
 
   .socialBtn {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .socialBtn svg {
+    width: 16px;
+    height: 16px;
   }
 
   .footerBigText {
-    font-size: 90px;
+    font-size: clamp(5rem, 16vw, 8rem);
     bottom: 10px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL MOBILE (480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .footer {
+    padding-top: 56px;
+  }
+
+  .footerInner {
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .footerCtaTitle {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .footerLinks {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footerCol {
+    min-width: 100%;
+    gap: 10px;
+  }
+
+  .footerColTitle {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .footerLink,
+  .footerContactItem {
+    font-size: 14px;
+  }
+
+  .footerBottom {
+    gap: 16px;
+    padding-top: 20px;
+    padding-bottom: 24px;
+  }
+
+  .footerBottom p {
+    font-size: 12px;
+  }
+
+  .footerSocials {
+    gap: 8px;
+  }
+
+  .socialBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .socialBtn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .footerBigText {
+    font-size: clamp(4rem, 14vw, 6rem);
   }
 }
