@@ -31,7 +31,7 @@ const CONTACT_INFO = [
     type: 'email',
     icon: FiMail,
     label: 'kenul94@mail.ru',
-    href: 'mailto:kenul94@mail.ru',
+    href: 'https://mail.ru/',
     external: false,
   },
   {
@@ -45,14 +45,14 @@ const CONTACT_INFO = [
     type: 'github',
     icon: FiGithub,
     label: 'GitHub',
-    href: 'https://github.com/YOUR_GITHUB',
+    href: 'https://github.com/kenul09',
     external: true,
   },
   {
     type: 'linkedin',
     icon: FiLinkedin,
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/YOUR_LINKEDIN',
+    href: 'https://www.linkedin.com/feed/',
     external: true,
   },
   {
