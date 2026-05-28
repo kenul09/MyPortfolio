@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useLanguage } from '../../hooks'
 import useSmoothScroll from '../../hooks/useSmoothScroll'
@@ -7,50 +7,25 @@ import { translations } from '../../translations'
 import styles from './Projects.module.css'
 
 /* ── Constants ── */
-const PROJECTS_PER_PAGE = 6
+const PROJECTS_PER_PAGE = 4
 
 export default function Projects() {
   const { language } = useLanguage()
   const t = translations[language]
-  const [filter, setFilter] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
   const { scrollToSection } = useSmoothScroll()
-
-  /* =========================
-     FILTER BUTTONS
-  ========================= */
-
-  const filters = [
-    { key: 'all',    label: t.projects.filters.all },
-    { key: 'uiux',   label: t.projects.filters.uiux },
-    { key: 'webdev', label: t.projects.filters.webdev },
-  ]
-
-  /* =========================
-     FILTERED PROJECTS
-  ========================= */
-
-  const filteredProjects = useMemo(() => {
-    if (filter === 'all') return t.projects.cards
-    return t.projects.cards.filter((project) => project.tag === filter)
-  }, [filter, t.projects.cards])
 
   /* =========================
      PAGINATION LOGIC
   ========================= */
 
-  const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE)
+  const totalPages = Math.ceil(t.projects.cards.length / PROJECTS_PER_PAGE)
 
   const paginatedProjects = useMemo(() => {
     const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE
     const endIndex = startIndex + PROJECTS_PER_PAGE
-    return filteredProjects.slice(startIndex, endIndex)
-  }, [filteredProjects, currentPage])
-
-  /* Filter dəyişəndə 1-ci səhifəyə qayıt */
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [filter])
+    return t.projects.cards.slice(startIndex, endIndex)
+  }, [t.projects.cards, currentPage])
 
   /* Səhifə dəyişəndə yuxarı scroll */
   const handlePageChange = (page) => {
@@ -151,34 +126,8 @@ export default function Projects() {
           </div>
         </header>
 
-        {/* ── FILTERS ── */}
-        <div
-          className={styles.projectFilters}
-          role="tablist"
-          aria-label="Project category filters"
-        >
-          {filters.map((item) => (
-            <button
-              key={item.key}
-              className={`${styles.filterBtn} ${
-                filter === item.key ? styles.filterBtnActive : ''
-              }`}
-              onClick={() => setFilter(item.key)}
-              role="tab"
-              aria-selected={filter === item.key}
-              type="button"
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-
         {/* ── PROJECTS GRID ── */}
-        <div
-          className={styles.projectsGrid}
-          role="tabpanel"
-          aria-label={`Showing ${filter} projects`}
-        >
+        <div className={styles.projectsGrid}>
           {paginatedProjects.map((project, index) => (
             <a
               key={project.title + index}
@@ -218,15 +167,7 @@ export default function Projects() {
 
               {/* Content */}
               <div className={styles.projectContent}>
-                <span
-                  className={styles.projectTag}
-                  style={{ background: project.color }}
-                >
-                  {t.projects.tags[project.tag]}
-                </span>
-
                 <h3 className={styles.projectTitle}>{project.title}</h3>
-
                 <p className={styles.projectDesc}>{project.desc}</p>
               </div>
             </a>
@@ -313,15 +254,6 @@ export default function Projects() {
               </svg>
             </button>
           </nav>
-        )}
-
-        {/* ── PAGE INFO ── */}
-        {totalPages > 1 && (
-          <p className={styles.pageInfo}>
-            Showing {(currentPage - 1) * PROJECTS_PER_PAGE + 1}-
-            {Math.min(currentPage * PROJECTS_PER_PAGE, filteredProjects.length)} of{' '}
-            {filteredProjects.length} projects
-          </p>
         )}
       </div>
     </section>

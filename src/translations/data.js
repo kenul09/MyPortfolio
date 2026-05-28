@@ -2,6 +2,7 @@ import socialApp from "../assets/images/social-app.png"
 import cvBuilder from "../assets/images/cv-builder.png"
 import branding from "../assets/images/branding.png"
 import filmApp from "../assets/images/film-app.png"
+import ecommerceApp from "../assets/images/ecommerce-app.png" 
 
 export const translations = {
   az: {
@@ -77,15 +78,6 @@ export const translations = {
         viewAll: 'Hamısına Bax',
         collaborate: 'Birlikdə işləyək →',
       },
-      filters: {
-        all: 'Hamısı',
-        uiux: 'UI/UX Dizayn',
-        webdev: 'Veb İnkişafı',
-      },
-      tags: {
-        uiux: 'UI/UX Dizayn',
-        webdev: 'Veb İnkişafı',
-      },
       cards: [
         {
           title: 'CV Builder Platforması',
@@ -114,6 +106,13 @@ export const translations = {
           color: '#ec4899',
           img: filmApp,
           link: 'https://routerweb-68o4.vercel.app/',
+        },
+        {
+          title: 'E-commerce Platforması',
+          desc: 'Müasir online mağaza dizaynı və funksionallığı.',
+          color: '#f59e0b',
+          img: ecommerceApp,
+          link: 'https://your-ecommerce-link.vercel.app/',
         },
       ],
     },
@@ -283,28 +282,17 @@ export const translations = {
         viewAll: 'View All Works',
         collaborate: "Let's Work Together →",
       },
-      filters: {
-        all: 'All',
-        uiux: 'UI/UX Design',
-        webdev: 'Web Development',
-      },
-      tags: {
-        uiux: 'UI/UX Design',
-        webdev: 'Web Development',
-      },
       cards: [
         {
           title: 'CV Builder Platform',
           desc: 'An intuitive platform to build professional CVs with ease.',
-          tag: 'webdev',
           color: '#2563eb',
           img: cvBuilder,
-          link: 'https://cv-builder.vercel.app',
+          link: 'https://cvgenerateapp.vercel.app/',
         },
         {
           title: 'Social Media Dashboard UI/UX',
           desc: 'A clean and modern dashboard design for better engagement.',
-          tag: 'uiux',
           color: '#3b82f6',
           img: socialApp,
           link: 'https://social-app-orpin-five.vercel.app/',
@@ -312,18 +300,23 @@ export const translations = {
         {
           title: 'Aprint – Branding Services Platform',
           desc: 'A professional platform for branding and creative services.',
-          tag: 'webdev',
           color: '#9333ea',
           img: branding,
-          link: 'https://aprint.vercel.app',
+          link: 'https://custom-hook-kappa-sand.vercel.app/',
         },
         {
           title: 'Film Platform UI/UX',
           desc: 'An immersive UI/UX design for movies and TV series.',
-          tag: 'uiux',
           color: '#ec4899',
           img: filmApp,
-          link: 'https://film-app.vercel.app',
+          link: 'https://routerweb-68o4.vercel.app/',
+        },
+        {
+          title: 'E-commerce Platform',
+          desc: 'Modern online store design and functionality.',
+          color: '#f59e0b',
+          img: ecommerceApp,
+          link: 'https://your-ecommerce-link.vercel.app/',
         },
       ],
     },
@@ -493,28 +486,17 @@ export const translations = {
         viewAll: 'Посмотреть все работы',
         collaborate: 'Давайте работать вместе →',
       },
-      filters: {
-        all: 'Все',
-        uiux: 'UI/UX Дизайн',
-        webdev: 'Веб-разработка',
-      },
-      tags: {
-        uiux: 'UI/UX Дизайн',
-        webdev: 'Веб-разработка',
-      },
       cards: [
         {
           title: 'Платформа для создания резюме',
           desc: 'Интуитивная платформа для создания профессиональных резюме.',
-          tag: 'webdev',
           color: '#2563eb',
           img: cvBuilder,
-          link: 'https://cv-builder.vercel.app',
+          link: 'https://cvgenerateapp.vercel.app/',
         },
         {
           title: 'Дашборд социальных сетей UI/UX',
           desc: 'Чистый и современный дизайн для лучшего вовлечения.',
-          tag: 'uiux',
           color: '#3b82f6',
           img: socialApp,
           link: 'https://social-app-orpin-five.vercel.app/',
@@ -522,18 +504,23 @@ export const translations = {
         {
           title: 'Aprint – Платформа брендинга',
           desc: 'Платформа для брендинга и креативных услуг.',
-          tag: 'webdev',
           color: '#9333ea',
           img: branding,
-          link: 'https://aprint.vercel.app',
+          link: 'https://custom-hook-kappa-sand.vercel.app/',
         },
         {
           title: 'Платформа для фильмов UI/UX',
           desc: 'Погружающий UI/UX для кино и сериалов.',
-          tag: 'uiux',
           color: '#ec4899',
           img: filmApp,
-          link: 'https://film-app.vercel.app',
+          link: 'https://routerweb-68o4.vercel.app/',
+        },
+        {
+          title: 'E-commerce Платформа',
+          desc: 'Современный дизайн и функциональность онлайн магазина.',
+          color: '#f59e0b',
+          img: ecommerceApp,
+          link: 'https://your-ecommerce-link.vercel.app/',
         },
       ],
     },

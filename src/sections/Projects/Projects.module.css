@@ -1,15 +1,3 @@
-/* ============================================
-   PROJECTS SECTION — CSS MODULE
-   
-   UI/UX Standards:
-   - Type Scale: Modular (1.250 - Major Third)
-   - Spacing: 8pt Grid System
-   - Line Height: Optimal Vertical Rhythm
-   - Color Contrast: WCAG AA Compliant
-   - Card Design: Modern Portfolio Pattern
-   - Pagination: Touch-friendly + Accessible
-   ============================================ */
-
 .projects {
   position: relative;
   padding: 120px 0;
@@ -219,66 +207,6 @@
 }
 
 /* =========================
-   FILTERS
-========================= */
-
-.projectFilters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 40px;
-  padding: 6px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  width: fit-content;
-}
-
-.filterBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  padding: 8px 18px;
-  font-family: inherit;
-  font-size: 0.8125rem;
-  line-height: 1;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--text-secondary);
-  background: transparent;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    color 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.filterBtn:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.filterBtnActive {
-  color: #ffffff;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
-}
-
-.filterBtnActive:hover {
-  color: #ffffff;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-}
-
-.filterBtn:focus-visible {
-  outline: 2px solid #60a5fa;
-  outline-offset: 2px;
-}
-
-/* =========================
    GRID
 ========================= */
 
@@ -286,6 +214,14 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+}
+
+/* ⚡ Tək sayda card olanda son card mərkəzdə görünür (yarımcadan tam ene qədər) */
+.projectsGrid > .projectCard:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: calc(50% - 12px);
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* =========================
@@ -389,30 +325,6 @@
   gap: 12px;
   padding: 24px;
   flex: 1;
-}
-
-/* =========================
-   TAG
-========================= */
-
-.projectTag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 12px;
-  font-size: 0.6875rem;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #ffffff;
-  border-radius: 999px;
-  width: fit-content;
-  transition: filter 0.3s ease;
-}
-
-.projectCard:hover .projectTag {
-  filter: brightness(1.15);
 }
 
 /* =========================
@@ -620,12 +532,13 @@
     flex-wrap: wrap;
   }
 
-  .projectFilters {
-    margin-bottom: 32px;
-  }
-
   .projectsGrid {
     gap: 20px;
+  }
+
+  /* Mərkəzdəki tək card — tablet üçün gap düzəldildi */
+  .projectsGrid > .projectCard:last-child:nth-child(odd) {
+    max-width: calc(50% - 10px);
   }
 
   .projectImageWrapper {
@@ -676,18 +589,15 @@
     padding: 10px 20px;
   }
 
-  .projectFilters {
-    margin-bottom: 28px;
-  }
-
-  .filterBtn {
-    font-size: 0.75rem;
-    padding: 8px 14px;
-  }
-
   .projectsGrid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  /* Mobile-də 1 sütun olduğu üçün mərkəzləmə lazım deyil */
+  .projectsGrid > .projectCard:last-child:nth-child(odd) {
+    max-width: 100%;
+    grid-column: auto;
   }
 
   .projectImageWrapper {
@@ -796,24 +706,6 @@
     justify-content: center;
   }
 
-  .projectFilters {
-    width: 100%;
-    margin-bottom: 24px;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    scrollbar-width: none;
-  }
-
-  .projectFilters::-webkit-scrollbar {
-    display: none;
-  }
-
-  .filterBtn {
-    font-size: 0.75rem;
-    padding: 8px 14px;
-    flex-shrink: 0;
-  }
-
   .projectsGrid {
     gap: 16px;
   }
@@ -829,11 +721,6 @@
   .projectContent {
     padding: 18px;
     gap: 10px;
-  }
-
-  .projectTag {
-    font-size: 0.625rem;
-    padding: 5px 10px;
   }
 
   .projectTitle {
@@ -884,11 +771,9 @@
   .projectImage,
   .projectOverlay,
   .projectOverlayIcon,
-  .projectTag,
   .projectTitle,
   .btnPrimary,
   .btnGhost,
-  .filterBtn,
   .paginationBtn,
   .paginationNumber {
     transition: none;
