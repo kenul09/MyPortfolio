@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 
 import { useLanguage } from '../../hooks'
 import useSmoothScroll from '../../hooks/useSmoothScroll'
@@ -6,10 +6,14 @@ import { translations } from '../../translations'
 
 import styles from './Projects.module.css'
 
+/* ── Constants ── */
+const PROJECTS_PER_PAGE = 6
+
 export default function Projects() {
   const { language } = useLanguage()
   const t = translations[language]
   const [filter, setFilter] = useState('all')
+  const [currentPage, setCurrentPage] = useState(1)
   const { scrollToSection } = useSmoothScroll()
 
   /* =========================
@@ -17,7 +21,7 @@ export default function Projects() {
   ========================= */
 
   const filters = [
-    { key: 'all',     label: t.projects.filters.all },
+    { key: 'all',    label: t.projects.filters.all },
     { key: 'uiux',   label: t.projects.filters.uiux },
     { key: 'webdev', label: t.projects.filters.webdev },
   ]
@@ -31,22 +35,74 @@ export default function Projects() {
     return t.projects.cards.filter((project) => project.tag === filter)
   }, [filter, t.projects.cards])
 
-  return (
-    <section className={`section ${styles.projects}`} id="projects">
-      <div className="container">
+  /* =========================
+     PAGINATION LOGIC
+  ========================= */
 
-        {/* HEADER */}
-        <div className={styles.projectsHeader}>
-          <div>
-            <span className="section-label">
+  const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE)
+
+  const paginatedProjects = useMemo(() => {
+    const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE
+    const endIndex = startIndex + PROJECTS_PER_PAGE
+    return filteredProjects.slice(startIndex, endIndex)
+  }, [filteredProjects, currentPage])
+
+  /* Filter dəyişəndə 1-ci səhifəyə qayıt */
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filter])
+
+  /* Səhifə dəyişəndə yuxarı scroll */
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+    document
+      .getElementById('projects')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  /* Smart page numbers: 1 ... 4 5 6 ... 10 */
+  const getPageNumbers = () => {
+    const pages = []
+    const maxVisible = 5
+
+    if (totalPages <= maxVisible) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i)
+    } else {
+      if (currentPage <= 3) {
+        pages.push(1, 2, 3, 4, '...', totalPages)
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
+      } else {
+        pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages)
+      }
+    }
+
+    return pages
+  }
+
+  return (
+    <section
+      className={styles.projects}
+      id="projects"
+      aria-labelledby="projects-heading"
+    >
+      {/* Decorative background */}
+      <div className={styles.bgGlow} aria-hidden="true" />
+
+      <div className={styles.container}>
+        {/* ── HEADER ── */}
+        <header className={styles.projectsHeader}>
+          <div className={styles.projectsHeaderText}>
+            <span className={styles.sectionLabel}>
+              <span className={styles.labelDot} aria-hidden="true" />
               {t.projects.sectionLabel}
             </span>
 
-            <h2 className={styles.projectsTitle}>
+            <h2 id="projects-heading" className={styles.projectsTitle}>
               {t.projects.titleTop}
               <br />
               {t.projects.titleBottom}{' '}
-              <span className={styles.titleBlue}>
+              <span className={styles.titleAccent}>
                 {t.projects.titleAccent}
               </span>
             </h2>
@@ -61,56 +117,106 @@ export default function Projects() {
             </p>
           </div>
 
-          {/* ACTION BUTTONS */}
+          {/* ── ACTION BUTTONS ── */}
           <div className={styles.projectsHeaderActions}>
             <button
-              className="btn-primary"
+              className={styles.btnPrimary}
               onClick={() => scrollToSection('projects')}
+              type="button"
             >
               {t.projects.buttons.viewAll}
-              <span className="arrow" aria-hidden="true">→</span>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
             </button>
 
             <button
-              className="btn-ghost"
+              className={styles.btnGhost}
               onClick={() => scrollToSection('contact')}
+              type="button"
             >
               {t.projects.buttons.collaborate}
             </button>
           </div>
-        </div>
+        </header>
 
-        {/* FILTERS */}
-        <div className={styles.projectFilters} role="tablist">
+        {/* ── FILTERS ── */}
+        <div
+          className={styles.projectFilters}
+          role="tablist"
+          aria-label="Project category filters"
+        >
           {filters.map((item) => (
             <button
               key={item.key}
-              className={`${styles.filterBtn} ${filter === item.key ? styles.active : ''}`}
+              className={`${styles.filterBtn} ${
+                filter === item.key ? styles.filterBtnActive : ''
+              }`}
               onClick={() => setFilter(item.key)}
               role="tab"
               aria-selected={filter === item.key}
+              type="button"
             >
               {item.label}
             </button>
           ))}
         </div>
 
-        {/* PROJECTS GRID */}
-        <div className={styles.projectsGrid}>
-          {filteredProjects.map((project, index) => (
+        {/* ── PROJECTS GRID ── */}
+        <div
+          className={styles.projectsGrid}
+          role="tabpanel"
+          aria-label={`Showing ${filter} projects`}
+        >
+          {paginatedProjects.map((project, index) => (
             <a
               key={project.title + index}
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.projectCard}
+              aria-label={`View project: ${project.title}`}
             >
-              <img
-                src={project.img}
-                alt={project.title}
-                className={styles.projectImage}
-              />
+              {/* Image with overlay */}
+              <div className={styles.projectImageWrapper}>
+                <img
+                  src={project.img}
+                  alt={project.title}
+                  className={styles.projectImage}
+                  loading="lazy"
+                />
+                <div className={styles.projectOverlay} aria-hidden="true">
+                  <span className={styles.projectOverlayIcon}>
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
 
+              {/* Content */}
               <div className={styles.projectContent}>
                 <span
                   className={styles.projectTag}
@@ -119,14 +225,104 @@ export default function Projects() {
                   {t.projects.tags[project.tag]}
                 </span>
 
-                <h3>{project.title}</h3>
+                <h3 className={styles.projectTitle}>{project.title}</h3>
 
-                <p>{project.desc}</p>
+                <p className={styles.projectDesc}>{project.desc}</p>
               </div>
             </a>
           ))}
         </div>
 
+        {/* ── PAGINATION ── */}
+        {totalPages > 1 && (
+          <nav
+            className={styles.pagination}
+            aria-label="Projects pagination"
+          >
+            {/* Previous button */}
+            <button
+              className={styles.paginationBtn}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+              type="button"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+
+            {/* Page numbers */}
+            <div className={styles.paginationNumbers}>
+              {getPageNumbers().map((page, idx) =>
+                page === '...' ? (
+                  <span
+                    key={`dots-${idx}`}
+                    className={styles.paginationDots}
+                    aria-hidden="true"
+                  >
+                    ···
+                  </span>
+                ) : (
+                  <button
+                    key={page}
+                    className={`${styles.paginationNumber} ${
+                      currentPage === page ? styles.paginationNumberActive : ''
+                    }`}
+                    onClick={() => handlePageChange(page)}
+                    aria-label={`Go to page ${page}`}
+                    aria-current={currentPage === page ? 'page' : undefined}
+                    type="button"
+                  >
+                    {page}
+                  </button>
+                )
+              )}
+            </div>
+
+            {/* Next button */}
+            <button
+              className={styles.paginationBtn}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              aria-label="Next page"
+              type="button"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </nav>
+        )}
+
+        {/* ── PAGE INFO ── */}
+        {totalPages > 1 && (
+          <p className={styles.pageInfo}>
+            Showing {(currentPage - 1) * PROJECTS_PER_PAGE + 1}-
+            {Math.min(currentPage * PROJECTS_PER_PAGE, filteredProjects.length)} of{' '}
+            {filteredProjects.length} projects
+          </p>
+        )}
       </div>
     </section>
   )

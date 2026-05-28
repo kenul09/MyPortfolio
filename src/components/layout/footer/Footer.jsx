@@ -11,177 +11,244 @@ import {
   FiLinkedin,
   FiDribbble,
   FiTwitter,
+  FiArrowUp,
 } from 'react-icons/fi'
 
 import { SiBehance } from 'react-icons/si'
+
+/* ── Constants ── */
+const QUICK_LINKS = ['about', 'services', 'projects', 'contact']
+
+const CONTACT_INFO = [
+  {
+    type: 'phone',
+    icon: FiPhone,
+    label: '+994 50 341 70 69',
+    href: 'tel:+994503417069',
+    external: false,
+  },
+  {
+    type: 'email',
+    icon: FiMail,
+    label: 'kenul94@mail.ru',
+    href: 'mailto:kenul94@mail.ru',
+    external: false,
+  },
+  {
+    type: 'instagram',
+    icon: FiInstagram,
+    label: '@s.k_web',
+    href: 'https://instagram.com/s.k_web',
+    external: true,
+  },
+  {
+    type: 'github',
+    icon: FiGithub,
+    label: 'GitHub',
+    href: 'https://github.com/YOUR_GITHUB',
+    external: true,
+  },
+  {
+    type: 'linkedin',
+    icon: FiLinkedin,
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/YOUR_LINKEDIN',
+    external: true,
+  },
+  {
+    type: 'behance',
+    icon: SiBehance,
+    label: 'Behance',
+    href: 'https://behance.net/YOUR_BEHANCE',
+    external: true,
+  },
+]
+
+const SOCIAL_LINKS = [
+  {
+    name: 'LinkedIn',
+    icon: FiLinkedin,
+    href: 'https://linkedin.com/in/YOUR_LINKEDIN',
+  },
+  {
+    name: 'Behance',
+    icon: SiBehance,
+    href: 'https://behance.net/YOUR_BEHANCE',
+  },
+  {
+    name: 'GitHub',
+    icon: FiGithub,
+    href: 'https://github.com/YOUR_GITHUB',
+  },
+  {
+    name: 'Dribbble',
+    icon: FiDribbble,
+    href: 'https://dribbble.com/YOUR_DRIBBBLE',
+  },
+  {
+    name: 'Twitter',
+    icon: FiTwitter,
+    href: 'https://x.com/YOUR_USERNAME',
+  },
+]
 
 export default function Footer() {
   const { language } = useLanguage()
   const t = translations[language]
   const { scrollTo } = useSmoothScroll()
 
-  return (
-    <footer className={`section ${styles.footer}`}>
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
+  const currentYear = new Date().getFullYear()
+
+  return (
+    <footer
+      className={styles.footer}
+      role="contentinfo"
+      aria-label="Site footer"
+    >
+      {/* Decorative background */}
+      <div className={styles.bgGlow} aria-hidden="true" />
+
+      {/* Big decorative text */}
       <div className={styles.footerBigText} aria-hidden="true">
         SKWEB
       </div>
 
-      <div className={`container ${styles.footerInner}`}>
+      <div className={styles.container}>
+        {/* ── MAIN CONTENT ── */}
+        <div className={styles.footerInner}>
+          {/* LEFT — CTA */}
+          <div className={styles.footerLeft}>
+            <span className={styles.sectionLabel}>
+              <span className={styles.labelDot} aria-hidden="true" />
+              {t.footer.sectionLabel || "Let's Connect"}
+            </span>
 
-        {/* LEFT */}
-        <div className={styles.footerLeft}>
-          <h3 className={styles.footerCtaTitle}>
-            {t.footer.ctaTitle}
-          </h3>
+            <h3 className={styles.footerCtaTitle}>
+              {t.footer.ctaTitle}
+            </h3>
 
-          <button
-            className="btn-primary"
-            onClick={() => scrollTo('contact')}
+            <button
+              className={styles.btnPrimary}
+              onClick={() => scrollTo('contact')}
+              type="button"
+            >
+              {t.footer.button}
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+          </div>
+
+          {/* RIGHT — LINKS */}
+          <div className={styles.footerLinks}>
+            {/* QUICK LINKS */}
+            <nav className={styles.footerCol} aria-label="Quick links">
+              <p className={styles.footerColTitle}>
+                {t.footer.quickLinksTitle}
+              </p>
+
+              <ul className={styles.footerList}>
+                {QUICK_LINKS.map((key) => (
+                  <li key={key}>
+                    <button
+                      className={styles.footerLink}
+                      onClick={() => scrollTo(key)}
+                      type="button"
+                    >
+                      {t.navbar[key]}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* CONTACT */}
+            <div className={styles.footerCol}>
+              <p className={styles.footerColTitle}>
+                {t.footer.contactTitle}
+              </p>
+
+              <ul className={styles.footerList}>
+                {CONTACT_INFO.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <li key={item.type}>
+                      <a
+                        href={item.href}
+                        target={item.external ? '_blank' : undefined}
+                        rel={item.external ? 'noopener noreferrer' : undefined}
+                        className={styles.footerContactItem}
+                        aria-label={`${item.type}: ${item.label}`}
+                      >
+                        <span className={styles.contactIconWrapper} aria-hidden="true">
+                          <Icon className={styles.contactIcon} />
+                        </span>
+                        <span className={styles.contactLabel}>{item.label}</span>
+                      </a>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* ── DIVIDER ── */}
+        <div className={styles.footerDivider} aria-hidden="true" />
+
+        {/* ── BOTTOM ── */}
+        <div className={styles.footerBottom}>
+          <p className={styles.footerCopyright}>
+            © {currentYear} {t.footer.bottomText}
+          </p>
+
+          <div
+            className={styles.footerSocials}
+            aria-label="Social media links"
           >
-            {t.footer.button}
+            {SOCIAL_LINKS.map((social) => {
+              const Icon = social.icon
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialBtn}
+                  aria-label={social.name}
+                >
+                  <Icon aria-hidden="true" />
+                </a>
+              )
+            })}
+          </div>
+
+          {/* Scroll to top button */}
+          <button
+            className={styles.scrollTopBtn}
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            type="button"
+          >
+            <FiArrowUp aria-hidden="true" />
           </button>
         </div>
-
-        {/* RIGHT */}
-        <div className={styles.footerLinks}>
-
-          {/* QUICK LINKS */}
-          <div className={styles.footerCol}>
-            <p className={styles.footerColTitle}>
-              {t.footer.quickLinksTitle}
-            </p>
-
-            {['about', 'services', 'projects', 'contact'].map((key) => (
-              <button
-                key={key}
-                className={styles.footerLink}
-                onClick={() => scrollTo(key)}
-              >
-                {t.navbar[key]}
-              </button>
-            ))}
-          </div>
-
-          {/* CONTACT */}
-          <div className={styles.footerCol}>
-            <p className={styles.footerColTitle}>
-              {t.footer.contactTitle}
-            </p>
-
-            <a href="tel:+994503417069" className={styles.footerContactItem}>
-              <FiPhone className={styles.contactIcon} />
-              +994 50 341 70 69
-            </a>
-
-            <a href="mailto:kenul94@mail.ru" className={styles.footerContactItem}>
-              <FiMail className={styles.contactIcon} />
-              kenul94@mail.ru
-            </a>
-
-            <a
-              href="https://instagram.com/s.k_web"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.footerContactItem}
-            >
-              <FiInstagram className={styles.contactIcon} />
-              @s.k_web
-            </a>
-
-            <a
-              href="https://github.com/YOUR_GITHUB"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.footerContactItem}
-            >
-              <FiGithub className={styles.contactIcon} />
-              GitHub
-            </a>
-
-            <a
-              href="https://linkedin.com/in/YOUR_LINKEDIN"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.footerContactItem}
-            >
-              <FiLinkedin className={styles.contactIcon} />
-              LinkedIn
-            </a>
-
-            <a
-              href="https://behance.net/YOUR_BEHANCE"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.footerContactItem}
-            >
-              <SiBehance className={styles.contactIcon} />
-              Behance
-            </a>
-
-          </div>
-        </div>
       </div>
-
-      {/* BOTTOM */}
-      <div className={`container ${styles.footerBottom}`}>
-        <p>{t.footer.bottomText}</p>
-
-        <div className={styles.footerSocials}>
-
-          <a
-            href="https://linkedin.com/in/YOUR_LINKEDIN"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.socialBtn}
-            aria-label="LinkedIn"
-          >
-            <FiLinkedin />
-          </a>
-
-          <a
-            href="https://behance.net/YOUR_BEHANCE"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.socialBtn}
-            aria-label="Behance"
-          >
-            <SiBehance />
-          </a>
-
-          <a
-            href="https://github.com/YOUR_GITHUB"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.socialBtn}
-            aria-label="GitHub"
-          >
-            <FiGithub />
-          </a>
-
-          <a
-            href="https://dribbble.com/YOUR_DRIBBBLE"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.socialBtn}
-            aria-label="Dribbble"
-          >
-            <FiDribbble />
-          </a>
-
-          <a
-            href="https://x.com/YOUR_USERNAME"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.socialBtn}
-            aria-label="Twitter"
-          >
-            <FiTwitter />
-          </a>
-
-        </div>
-      </div>
-
     </footer>
   )
 }

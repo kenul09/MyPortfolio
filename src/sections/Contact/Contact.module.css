@@ -1,19 +1,28 @@
 /* ============================================
    CONTACT SECTION — CSS MODULE
-   UI/UX Standards: 8pt Grid + Form UX
+   
+   UI/UX Standards:
+   - Type Scale: Modular (1.250 - Major Third)
+   - Spacing: 8pt Grid System
+   - Line Height: Optimal Vertical Rhythm
+   - Color Contrast: WCAG AA Compliant
+   - Form UX: Material + Custom Components
    ============================================ */
 
 .contact {
   position: relative;
-  padding: 120px 0;
+  padding: 120px 0;                   /* 8pt grid */
   background: transparent;
   overflow: hidden;
   color: var(--text-primary);
   transition: color 0.3s ease;
 }
 
-.contact::before {
-  content: '';
+/* =========================
+   DECORATIVE BACKGROUND
+========================= */
+
+.bgGlow {
   position: absolute;
   top: 10%;
   right: 10%;
@@ -22,12 +31,24 @@
   background: radial-gradient(circle at 40% 30%, var(--blue-glow), transparent 45%);
   filter: blur(90px);
   pointer-events: none;
+  z-index: 0;
+  animation: floatGlow 14s ease-in-out infinite;
 }
 
-.contactBg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+@keyframes floatGlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, 20px); }
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+  width: min(1400px, calc(100% - 96px));
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================
@@ -36,58 +57,103 @@
 
 .contactInner {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 80px;
-  position: relative;
-  z-index: 1;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 64px;                          /* 8pt grid */
   align-items: start;
 }
 
 /* =========================
-   LEFT
+   LEFT — INFO
 ========================= */
 
 .contactLeft {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;                          /* 8pt grid */
   position: sticky;
   top: 120px;
 }
 
-.contactTitle {
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  margin-bottom: 16px;
-  margin-top: 8px;
-  color: var(--text-primary);
+/* =========================
+   SECTION LABEL (Consistency)
+========================= */
+
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;                          /* 8pt grid */
+  width: fit-content;
+  font-size: 0.8125rem;               /* 13px */
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-bright, #7dd3fc);
+  margin: 0;
 }
 
-.contactDesc {
-  font-size: 17px;
-  color: var(--text-secondary);
-  line-height: 1.75;
-  max-width: 520px;
+.labelDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--blue-bright, #38bdf8);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--blue-bright, #38bdf8);
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.7; }
 }
 
 /* =========================
-   FORM
+   TITLE (H2)
+   Type: clamp(32px → 48px) / 1.15 / -0.02em / 800
+========================= */
+
+.contactTitle {
+  font-size: clamp(2rem, 4vw, 3rem);  /* 32px → 48px */
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* =========================
+   DESCRIPTION
+   Type: 17px / 1.7 / 0 / 400
+========================= */
+
+.contactDesc {
+  font-size: 1.0625rem;               /* 17px */
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: rgba(245, 248, 255, 0.82);   /* WCAG AA */
+  max-width: 520px;
+  margin: 0;
+}
+
+/* =========================
+   FORM CONTAINER
 ========================= */
 
 .contactForm {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 48px;
-  border-radius: var(--radius-lg);
+  gap: 20px;                          /* 8pt grid */
+  padding: 40px;                      /* 8pt grid */
   background: var(--bg-card);
   border: 1px solid var(--border);
-  box-shadow:
-    var(--shadow-card),
-    0 0 30px var(--blue-glow-sm);
+  border-radius: 20px;                /* 8pt grid */
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(59, 130, 246, 0.08);
   transition:
     background 0.3s ease,
     border-color 0.3s ease,
@@ -97,117 +163,328 @@
 .formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 16px;                          /* 8pt grid */
 }
 
 .formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                           /* 8pt grid */
   width: 100%;
 }
 
-.contactForm input,
-.contactForm select,
-.contactForm textarea {
+/* =========================
+   FORM LABEL
+   Type: 13px / 1.4 / 0.02em / 600
+========================= */
+
+.formLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;               /* 13px */
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
+.required {
+  color: #f87171;
+  font-weight: 700;
+}
+
+/* =========================
+   FORM INPUTS
+   Type: 15px / 1.5 / 0 / 400
+   Min-height: 48px (touch target)
+========================= */
+
+.formInput,
+.formSelect,
+.formTextarea {
   width: 100%;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  font-family: var(--font);
-  font-size: 15px;
+  min-height: 48px;                   /* Touch target */
+  padding: 14px 16px;                 /* 8pt grid */
+  font-family: inherit;
+  font-size: 0.9375rem;               /* 15px */
   line-height: 1.5;
-  padding: 16px 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;                /* 8pt grid */
   outline: none;
-  transition: 0.3s ease;
-  border-radius: 16px;
   appearance: none;
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.contactForm input:focus,
-.contactForm select:focus,
-.contactForm textarea:focus {
-  border-color: var(--border-hover);
-  box-shadow: 0 0 0 3px var(--blue-glow-sm);
-  background: var(--bg-card-soft);
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: rgba(245, 248, 255, 0.35);
 }
 
-.contactForm input:hover:not(:focus),
-.contactForm select:hover:not(:focus),
-.contactForm textarea:hover:not(:focus) {
-  border-color: rgba(25, 118, 210, 0.3);
+.formInput:hover:not(:focus),
+.formSelect:hover:not(:focus),
+.formTextarea:hover:not(:focus) {
+  border-color: rgba(59, 130, 246, 0.25);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.contactForm select {
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  border-color: #3b82f6;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Error state */
+.formInputError {
+  border-color: #f87171 !important;
+  background: rgba(248, 113, 113, 0.05) !important;
+}
+
+.formInputError:focus {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15) !important;
+}
+
+/* Textarea specific */
+.formTextarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* =========================
+   CUSTOM SELECT
+========================= */
+
+.selectWrapper {
+  position: relative;
+}
+
+.formSelect {
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23A8B8CC' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 20px center;
   padding-right: 48px;
 }
 
-.contactForm select option {
-  background: var(--bg-secondary);
+.formSelect option {
+  background: #0f172a;
   color: var(--text-primary);
   padding: 12px;
 }
 
-.contactForm input::placeholder,
-.contactForm textarea::placeholder {
-  color: var(--text-muted);
+.selectIcon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: transform 0.3s ease;
 }
 
-.contactForm textarea {
-  resize: vertical;
-  min-height: 120px;
-  font-family: var(--font);
+.formSelect:focus + .selectIcon {
+  transform: translateY(-50%) rotate(180deg);
+  color: #3b82f6;
 }
 
 /* =========================
-   CHECKBOX
+   FORM ERROR MESSAGE
+   Type: 12px / 1.4 / 0 / 500
+========================= */
+
+.formError {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;                 /* 12px */
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #f87171;
+  margin-top: 2px;
+}
+
+/* =========================
+   CUSTOM CHECKBOX
 ========================= */
 
 .checkboxLabel {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 12px;                          /* 8pt grid */
   cursor: pointer;
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 0.875rem;                /* 14px */
   line-height: 1.6;
+  color: var(--text-secondary);
   margin-top: 4px;
+  user-select: none;
 }
 
-.checkboxLabel input {
-  width: 18px;
-  height: 18px;
-  border: 1px solid var(--border);
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.checkboxBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
   margin-top: 2px;
-  accent-color: var(--blue-primary);
-  cursor: pointer;
-  padding: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: transparent;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
-.checkboxLabel a {
-  color: var(--blue-bright);
+.checkboxInput:checked + .checkboxBox {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.checkboxInput:focus-visible + .checkboxBox {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+.checkboxLabel:hover .checkboxBox {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.checkboxText {
+  flex: 1;
+}
+
+.checkboxLink {
+  color: var(--blue-bright, #60a5fa);
   text-decoration: underline;
   text-underline-offset: 2px;
-  transition: 0.3s ease;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.checkboxLabel a:hover {
+.checkboxLink:hover {
   color: var(--text-primary);
 }
 
 /* =========================
-   SUBMIT
+   SUBMIT BUTTON
+   Type: 15px / 1 / 0.01em / 600
+   Min-height: 48px (touch target)
 ========================= */
 
 .submitBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   align-self: flex-start;
-  margin-top: 12px;
+  min-height: 48px;                   /* Touch target */
+  padding: 14px 32px;                 /* 8pt grid */
+  margin-top: 8px;
+  font-family: inherit;
+  font-size: 0.9375rem;               /* 15px */
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.45);
+}
+
+.submitBtn:hover:not(:disabled) svg:not(.spinner) {
+  transform: translateX(4px);
+}
+
+.submitBtn svg:not(.spinner) {
+  transition: transform 0.3s ease;
+}
+
+.submitBtn:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
 }
 
 /* =========================
-   SUCCESS
+   SUBMIT ERROR
+========================= */
+
+.submitError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;                 /* 8pt grid */
+  font-size: 0.875rem;                /* 14px */
+  line-height: 1.5;
+  font-weight: 500;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* =========================
+   LOADING SPINNER
+========================= */
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* =========================
+   DISABLED STATES
+========================= */
+
+.formInput:disabled,
+.formSelect:disabled,
+.formTextarea:disabled,
+.checkboxInput:disabled + .checkboxBox,
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submitBtn:disabled {
+  transform: none !important;
+}
+
+/* =========================
+   SUCCESS MESSAGE
 ========================= */
 
 .successMsg {
@@ -216,40 +493,57 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 20px;
-  padding: 72px 48px;
+  gap: 20px;                          /* 8pt grid */
+  padding: 64px 40px;                 /* 8pt grid */
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 20px;                /* 8pt grid */
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2),
+    0 0 40px rgba(59, 130, 246, 0.15);
   animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .successIcon {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg, var(--blue-primary), var(--blue-bright));
-  border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  color: #fff;
-  box-shadow: 0 0 32px var(--blue-glow);
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border-radius: 50%;
+  color: #ffffff;
+  box-shadow: 0 0 32px rgba(59, 130, 246, 0.4);
+  animation: successIconPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
 }
 
-.successMsg h3 {
-  font-size: 1.5rem;
+/* =========================
+   SUCCESS TITLE (H3)
+   Type: 24px / 1.3 / -0.02em / 700
+========================= */
+
+.successTitle {
+  font-size: 1.5rem;                  /* 24px */
+  line-height: 1.3;
   font-weight: 700;
-  color: var(--text-primary);
   letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
 }
 
-.successMsg p {
-  color: var(--text-secondary);
-  font-size: 16px;
+/* =========================
+   SUCCESS TEXT
+   Type: 16px / 1.65 / 0 / 400
+========================= */
+
+.successText {
+  font-size: 1rem;                    /* 16px */
   line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: rgba(245, 248, 255, 0.75);
   max-width: 380px;
+  margin: 0;
 }
 
 @keyframes successPop {
@@ -263,23 +557,39 @@
   }
 }
 
+@keyframes successIconPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* ============================================
    RESPONSIVE — TABLET (1024px)
    ============================================ */
 
 @media (max-width: 1024px) {
   .contact {
-    padding: 96px 0;
+    padding: 96px 0;                  /* 8pt grid */
+  }
+
+  .container {
+    width: min(100%, calc(100% - 64px));
   }
 
   .contactInner {
-    grid-template-columns: 1fr 1.5fr;
-    gap: 56px;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
   }
 
   .contactLeft {
     position: static;
     top: auto;
+    gap: 16px;
   }
 
   .contactTitle {
@@ -287,11 +597,11 @@
   }
 
   .contactDesc {
-    font-size: 16px;
+    font-size: 1rem;                  /* 16px */
   }
 
   .contactForm {
-    padding: 40px;
+    padding: 32px;
     gap: 18px;
   }
 }
@@ -302,7 +612,11 @@
 
 @media (max-width: 768px) {
   .contact {
-    padding: 72px 0;
+    padding: 72px 0;                  /* 8pt grid */
+  }
+
+  .container {
+    width: min(100%, calc(100% - 48px));
   }
 
   .contactInner {
@@ -311,18 +625,22 @@
   }
 
   .contactLeft {
-    gap: 16px;
+    gap: 14px;
+  }
+
+  .sectionLabel {
+    font-size: 0.75rem;               /* 12px */
+    letter-spacing: 0.18em;
   }
 
   .contactTitle {
     font-size: clamp(1.75rem, 6vw, 2.25rem);
-    margin-bottom: 12px;
-    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   .contactDesc {
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 0.9375rem;             /* 15px */
+    line-height: 1.65;
     max-width: 100%;
   }
 
@@ -332,43 +650,44 @@
   }
 
   .contactForm {
-    padding: 32px 24px;
+    padding: 28px 20px;
     gap: 16px;
-    border-radius: 20px;
+    border-radius: 18px;
   }
 
-  .contactForm input,
-  .contactForm select,
-  .contactForm textarea {
-    font-size: 15px;
-    padding: 14px 18px;
-    border-radius: 14px;
+  .formInput,
+  .formSelect,
+  .formTextarea {
+    font-size: 0.9375rem;             /* 15px */
+    padding: 12px 14px;
   }
 
-  .contactForm textarea {
+  .formTextarea {
     min-height: 110px;
   }
 
   .submitBtn {
     align-self: stretch;
-    text-align: center;
     justify-content: center;
-    margin-top: 8px;
   }
 
   .successMsg {
-    padding: 56px 32px;
+    padding: 48px 32px;
     gap: 16px;
+    border-radius: 18px;
   }
 
   .successIcon {
     width: 64px;
     height: 64px;
-    font-size: 28px;
   }
 
-  .successMsg h3 {
-    font-size: 1.375rem;
+  .successTitle {
+    font-size: 1.375rem;              /* 22px */
+  }
+
+  .successText {
+    font-size: 0.9375rem;             /* 15px */
   }
 }
 
@@ -381,65 +700,124 @@
     padding: 56px 0;
   }
 
+  .container {
+    width: min(100%, calc(100% - 32px));
+  }
+
   .contactInner {
     gap: 32px;
   }
 
+  .contactLeft {
+    gap: 12px;
+  }
+
+  .sectionLabel {
+    font-size: 0.6875rem;             /* 11px */
+    letter-spacing: 0.16em;
+  }
+
   .contactTitle {
-    font-size: clamp(1.5rem, 7vw, 2rem);
-    margin-top: 4px;
-    margin-bottom: 8px;
+    font-size: clamp(1.5rem, 7vw, 1.875rem);
+    line-height: 1.2;
   }
 
   .contactDesc {
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: 0.875rem;              /* 14px */
+    line-height: 1.6;
   }
 
   .contactForm {
-    padding: 24px 20px;
+    padding: 24px 16px;
     gap: 14px;
-    border-radius: 18px;
+    border-radius: 16px;
   }
 
-  .contactForm input,
-  .contactForm select,
-  .contactForm textarea {
-    font-size: 14px;
-    padding: 13px 16px;
-    border-radius: 12px;
+  .formLabel {
+    font-size: 0.75rem;               /* 12px */
   }
 
-  .contactForm textarea {
+  .formInput,
+  .formSelect,
+  .formTextarea {
+    font-size: 0.875rem;              /* 14px */
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+
+  .formTextarea {
     min-height: 100px;
   }
 
+  .formError {
+    font-size: 0.6875rem;             /* 11px */
+  }
+
   .checkboxLabel {
-    font-size: 13px;
+    font-size: 0.8125rem;             /* 13px */
     gap: 10px;
   }
 
-  .checkboxLabel input {
-    width: 16px;
-    height: 16px;
+  .checkboxBox {
+    width: 18px;
+    height: 18px;
+  }
+
+  .submitBtn {
+    font-size: 0.875rem;              /* 14px */
+    padding: 12px 24px;
   }
 
   .successMsg {
     padding: 40px 24px;
     gap: 14px;
+    border-radius: 14px;
   }
 
   .successIcon {
     width: 56px;
     height: 56px;
-    font-size: 24px;
   }
 
-  .successMsg h3 {
-    font-size: 1.25rem;
+  .successTitle {
+    font-size: 1.25rem;               /* 20px */
   }
 
-  .successMsg p {
-    font-size: 14px;
+  .successText {
+    font-size: 0.875rem;              /* 14px */
+  }
+}
+
+/* ============================================
+   REDUCED MOTION (Accessibility WCAG 2.1)
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .bgGlow,
+  .labelDot,
+  .spinner {
+    animation: none;
+  }
+
+  .successMsg,
+  .successIcon {
+    animation: none;
+  }
+
+  .formInput,
+  .formSelect,
+  .formTextarea,
+  .checkboxBox,
+  .submitBtn,
+  .selectIcon {
+    transition: none;
+  }
+
+  .submitBtn:hover {
+    transform: none;
+  }
+
+  .submitBtn:hover svg:not(.spinner) {
+    transform: none;
   }
 }
