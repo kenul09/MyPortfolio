@@ -397,11 +397,9 @@
     min-height: 68px;
   }
 
-  .navLinks {
-    display: none;
-  }
-
-  .desktopOnly {
+  .navLinks,
+  .desktopOnly,
+  .themeToggle {
     display: none;
   }
 
@@ -429,7 +427,6 @@
     width: min(100%, calc(100% - 32px));
   }
 
-  .themeToggle,
   .burgerMenu {
     width: 42px;
     height: 42px;
