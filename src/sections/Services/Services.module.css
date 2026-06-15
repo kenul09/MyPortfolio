@@ -1,13 +1,6 @@
-/* ============================================
-   SERVICES SECTION — CSS MODULE
-   
-   UI/UX Standards:
-   - Type Scale: Modular (1.250 - Major Third)
-   - Spacing: 8pt Grid System
-   - Line Height: Optimal Vertical Rhythm
-   - Color Contrast: WCAG AA Compliant
-   - Card Design: Modern Service Pattern
-   ============================================ */
+.services * {
+  color: #ffffff !important;
+}
 
 .services {
   position: relative;
@@ -189,9 +182,6 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.1));
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  border-radius: 14px;
   margin-bottom: 20px;                /* 8pt grid */
   position: relative;
   z-index: 1;
@@ -201,11 +191,7 @@
     transform 0.3s ease;
 }
 
-.serviceCardHovered .serviceNumWrapper {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  border-color: transparent;
-  transform: scale(1.05);
-}
+
 
 .serviceNum {
   font-family: inherit;
@@ -213,7 +199,7 @@
   line-height: 1;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: var(--blue-bright, #60a5fa);
+  color: var(--blue-bright, #f2f5f7);
   transition: color 0.3s ease;
 }
 

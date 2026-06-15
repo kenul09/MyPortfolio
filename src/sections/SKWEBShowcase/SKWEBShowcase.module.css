@@ -281,10 +281,12 @@
     line-height: 1.7;
   }
 
-  .showcaseVideoWrapper::before {
-    inset: -20px;
-    filter: blur(50px);
+
+  .showcaseVideoWrapper {
+    width: calc(100% - 24px);
+    margin: 0 auto;
   }
+
 
   .showcaseVideo {
     border-radius: 20px;

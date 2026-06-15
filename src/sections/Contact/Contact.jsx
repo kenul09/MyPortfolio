@@ -7,9 +7,9 @@ import { translations } from '../../translations'
 import styles from './Contact.module.css'
 
 /* ── EmailJS Configuration ── */
-const EMAILJS_SERVICE_ID = 'service_abc123'      // ← Öz Service ID
+const EMAILJS_SERVICE_ID = 'service_htx2k8e'      // ← Öz Service ID
 const EMAILJS_TEMPLATE_ID = 'template_xyz789'    // ← Öz Template ID
-const EMAILJS_PUBLIC_KEY = 'abc123XYZ'           // ← Öz Public Key
+const EMAILJS_PUBLIC_KEY = 'FX5yH6EbphakDfCrd'           // ← Öz Public Key
 
 export default function Contact() {
   const { language } = useLanguage()

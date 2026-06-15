@@ -1,8 +1,8 @@
-import socialApp from "../assets/images/social-app.png"
-import cvBuilder from "../assets/images/cv-builder.png"
-import branding from "../assets/images/branding.png"
-import filmApp from "../assets/images/film-app.png"
-import ecommerceApp from "../assets/images/ecommerce-app.png" 
+import socialApp from "../assets/images/slide1.png";
+import filmApp from "../assets/images/slide2.png";
+import branding from "../assets/images/slide3.png";
+import cvBuilder from "../assets/images/slide1.png";
+import ecommerceApp from "../assets/images/slide2.png";
 
 export const translations = {
   az: {
