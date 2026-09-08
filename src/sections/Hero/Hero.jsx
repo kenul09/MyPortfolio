@@ -6,6 +6,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
 
+import Button from '../../components/ui/Button'
 import useMountAnimation from '../../hooks/useMountAnimation'
 import useSmoothScroll from '../../hooks/useSmoothScroll'
 import { useLanguage } from '../../hooks'
@@ -113,10 +114,9 @@ export default function Hero() {
             className={`${styles.heroActions} ${styles.fadeInUp}`}
             style={delay('0.5s')}
           >
-            <button
+            <Button
               className={styles.btnPrimary}
               onClick={() => scrollToSection('contact')}
-              type="button"
             >
               {t.startProject}
               <svg
@@ -133,14 +133,13 @@ export default function Hero() {
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
-            </button>
-            <button
+            </Button>
+            <Button
               className={styles.btnGhost}
               onClick={() => scrollToSection('projects')}
-              type="button"
             >
               {t.viewWorks}
-            </button>
+            </Button>
           </div>
 
           {/* Social Links */}

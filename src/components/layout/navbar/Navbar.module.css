@@ -97,6 +97,7 @@
 }
 
 .navLink {
+  position: relative;
   background: transparent;
   border: 0;
   color: var(--text-secondary);
@@ -112,6 +113,26 @@
     box-shadow 0.3s ease;
   white-space: nowrap;
   line-height: 1.2;
+}
+
+/* Non-color active cue (dot) so the active link doesn't rely on color alone */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  transform: translateX(-50%) scale(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.active::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }
 
 .navLink:hover {

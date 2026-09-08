@@ -5,7 +5,7 @@
 
 .skwebShowcase {
   position: relative;
-  padding: 120px 0;
+  padding: var(--space-30) 0;
   overflow: hidden;
   background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   color: var(--text-primary);
@@ -185,7 +185,7 @@
   z-index: 1;
   width: 100%;
   display: block;
-  border-radius: 24px;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   box-shadow:
     var(--shadow-card),
@@ -209,7 +209,7 @@
 
 @media (max-width: 1024px) {
   .skwebShowcase {
-    padding: 96px 0;
+    padding: var(--space-24) 0;
   }
 
   .container {
@@ -246,7 +246,7 @@
 
 @media (max-width: 768px) {
   .skwebShowcase {
-    padding: 72px 0;
+    padding: var(--space-18) 0;
   }
 
   .container {
@@ -299,7 +299,7 @@
 
 @media (max-width: 480px) {
   .skwebShowcase {
-    padding: 56px 0;
+    padding: var(--space-14) 0;
   }
 
   .container {

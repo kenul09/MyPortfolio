@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 
 import { useLanguage } from '../../hooks'
@@ -15,6 +15,7 @@ export default function Contact() {
   const { language } = useLanguage()
   const t = translations[language]
   const formRef = useRef(null)
+  const successRef = useRef(null)
 
   const [form, setForm] = useState({
     name: '',
@@ -38,13 +39,17 @@ export default function Contact() {
     }
   }
 
+  useEffect(() => {
+    if (sent) successRef.current?.focus()
+  }, [sent])
+
   const validate = () => {
     const newErrors = {}
-    if (!form.name.trim()) newErrors.name = t.contact.errors?.name || 'Name is required'
-    if (!form.email.trim()) newErrors.email = t.contact.errors?.email || 'Email is required'
+    if (!form.name.trim()) newErrors.name = t.contact.errors.name
+    if (!form.email.trim()) newErrors.email = t.contact.errors.email
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      newErrors.email = t.contact.errors?.emailInvalid || 'Invalid email'
-    if (!form.message.trim()) newErrors.message = t.contact.errors?.message || 'Message is required'
+      newErrors.email = t.contact.errors.emailInvalid
+    if (!form.message.trim()) newErrors.message = t.contact.errors.message
     if (!form.agreed) newErrors.agreed = t.contact.privacyAlert
 
     setErrors(newErrors)
@@ -84,7 +89,7 @@ export default function Contact() {
       })
     } catch (error) {
       console.error('Email send failed:', error)
-      setErrors({ submit: 'Mesaj göndərilmədi. Yenidən cəhd edin.' })
+      setErrors({ submit: t.contact.errors.submitFailed })
     } finally {
       setLoading(false)
     }
@@ -128,9 +133,11 @@ export default function Contact() {
           <div className={styles.contactRight}>
             {sent ? (
               <div
+                ref={successRef}
                 className={styles.successMsg}
                 role="status"
                 aria-live="polite"
+                tabIndex={-1}
               >
                 <div className={styles.successIcon} aria-hidden="true">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -207,7 +214,7 @@ export default function Contact() {
                 {/* Interest */}
                 <div className={styles.formGroup}>
                   <label htmlFor="interest" className={styles.formLabel}>
-                    {t.contact.interestLabel || 'Interested in'}
+                    {t.contact.interestLabel}
                   </label>
                   <div className={styles.selectWrapper}>
                     <select
@@ -315,7 +322,7 @@ export default function Contact() {
                         <circle cx="12" cy="12" r="10" strokeOpacity="0.25" />
                         <path d="M12 2a10 10 0 0 1 10 10" />
                       </svg>
-                      Göndərilir...
+                      {t.contact.sending}
                     </>
                   ) : (
                     <>

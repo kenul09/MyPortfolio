@@ -11,7 +11,7 @@
 
 .contact {
   position: relative;
-  padding: 120px 0;                   /* 8pt grid */
+  padding: var(--space-30) 0;                   /* 8pt grid */
   background: transparent;
   overflow: hidden;
   color: var(--text-primary);
@@ -132,7 +132,7 @@
   line-height: 1.7;
   font-weight: 400;
   letter-spacing: 0;
-  color: rgba(245, 248, 255, 0.82);   /* WCAG AA */
+  color: var(--text-secondary);       /* WCAG AA, theme-aware */
   max-width: 520px;
   margin: 0;
 }
@@ -225,7 +225,7 @@
 
 .formInput::placeholder,
 .formTextarea::placeholder {
-  color: rgba(245, 248, 255, 0.35);
+  color: var(--text-muted);
 }
 
 .formInput:hover:not(:focus),
@@ -397,6 +397,7 @@
   gap: 10px;
   align-self: flex-start;
   min-height: 48px;                   /* Touch target */
+  min-width: 240px;                   /* Stable width so the spinner doesn't reflow the button */
   padding: 14px 32px;                 /* 8pt grid */
   margin-top: 8px;
   font-family: inherit;
@@ -541,7 +542,7 @@
   line-height: 1.65;
   font-weight: 400;
   letter-spacing: 0;
-  color: rgba(245, 248, 255, 0.75);
+  color: var(--text-secondary);
   max-width: 380px;
   margin: 0;
 }
@@ -574,7 +575,7 @@
 
 @media (max-width: 1024px) {
   .contact {
-    padding: 96px 0;                  /* 8pt grid */
+    padding: var(--space-24) 0;                  /* 8pt grid */
   }
 
   .container {
@@ -612,7 +613,7 @@
 
 @media (max-width: 768px) {
   .contact {
-    padding: 72px 0;                  /* 8pt grid */
+    padding: var(--space-18) 0;                  /* 8pt grid */
   }
 
   .container {
@@ -697,7 +698,7 @@
 
 @media (max-width: 480px) {
   .contact {
-    padding: 56px 0;
+    padding: var(--space-14) 0;
   }
 
   .container {

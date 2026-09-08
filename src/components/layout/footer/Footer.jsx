@@ -1,4 +1,5 @@
 import styles from './Footer.module.css'
+import Button from '../../ui/Button'
 import { useLanguage } from '../../../hooks'
 import { translations } from '../../../translations'
 import useSmoothScroll from '../../../hooks/useSmoothScroll'
@@ -131,10 +132,9 @@ export default function Footer() {
               {t.footer.ctaTitle}
             </h3>
 
-            <button
+            <Button
               className={styles.btnPrimary}
               onClick={() => scrollTo('contact')}
-              type="button"
             >
               {t.footer.button}
               <svg
@@ -151,7 +151,7 @@ export default function Footer() {
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
-            </button>
+            </Button>
           </div>
 
           {/* RIGHT — LINKS */}

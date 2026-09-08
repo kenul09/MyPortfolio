@@ -11,7 +11,7 @@
 
 .footer {
   position: relative;
-  padding-top: 96px;                  /* 8pt grid */
+  padding-top: var(--space-24);                  /* 8pt grid */
   background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
   border-top: 1px solid var(--border);
   overflow: hidden;
@@ -258,7 +258,7 @@
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: 0;
-  color: rgba(245, 248, 255, 0.7);    /* WCAG AA */
+  color: var(--text-secondary);       /* WCAG AA, theme-aware */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -292,7 +292,7 @@
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: 0;
-  color: rgba(245, 248, 255, 0.7);    /* WCAG AA */
+  color: var(--text-secondary);       /* WCAG AA, theme-aware */
   text-decoration: none;
   transition:
     color 0.3s ease,
@@ -385,7 +385,7 @@
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: 0;
-  color: rgba(245, 248, 255, 0.5);
+  color: var(--text-muted);           /* WCAG AA, theme-aware */
   margin: 0;
 }
 
@@ -408,7 +408,7 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  color: rgba(245, 248, 255, 0.7);
+  color: var(--text-secondary);
   text-decoration: none;
   position: relative;
   overflow: hidden;

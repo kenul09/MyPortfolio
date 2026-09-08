@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 
+import Button from '../../components/ui/Button'
 import { useLanguage } from '../../hooks'
 import useSmoothScroll from '../../hooks/useSmoothScroll'
 import { translations } from '../../translations'
@@ -94,10 +95,9 @@ export default function Projects() {
 
           {/* ── ACTION BUTTONS ── */}
           <div className={styles.projectsHeaderActions}>
-            <button
+            <Button
               className={styles.btnPrimary}
               onClick={() => scrollToSection('projects')}
-              type="button"
             >
               {t.projects.buttons.viewAll}
               <svg
@@ -114,15 +114,14 @@ export default function Projects() {
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
-            </button>
+            </Button>
 
-            <button
+            <Button
               className={styles.btnGhost}
               onClick={() => scrollToSection('contact')}
-              type="button"
             >
               {t.projects.buttons.collaborate}
-            </button>
+            </Button>
           </div>
         </header>
 
