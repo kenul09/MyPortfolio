@@ -268,6 +268,20 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
+/* Floats over the image like a code-editor titlebar — doesn't touch the
+   aspect-ratio box's height, just an overlay strip pinned to the top. */
+.projectImageWrapper :global(.terminal-chrome) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background: rgba(10, 20, 32, 0.55);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
 .projectImage {
   width: 100%;
   height: 100%;
@@ -280,9 +294,27 @@
   transform: scale(1.05);
 }
 
+/* Always-on per-card tint (via --card-accent) so cards sharing a reused
+   screenshot still read as visually distinct from one another. */
+.projectAccentWash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(160deg, var(--card-accent, var(--blue-primary)) 0%, transparent 55%);
+  opacity: 0.28;
+  mix-blend-mode: hard-light;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.projectCard:hover .projectAccentWash {
+  opacity: 0.16;
+}
+
 .projectOverlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,8 +360,15 @@
 }
 
 /* =========================
-   PROJECT TITLE (H3)
+   PROJECT TITLE (H3) + URL
 ========================= */
+
+.projectTitleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
 
 .projectTitle {
   font-size: 1.25rem;
@@ -343,6 +382,18 @@
 
 .projectCard:hover .projectTitle {
   color: var(--blue-bright, #60a5fa);
+}
+
+/* Decorative "file path" style domain fragment, e.g. cv-builder.vercel.app */
+.projectUrl {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40%;
+  flex-shrink: 0;
 }
 
 /* =========================

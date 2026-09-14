@@ -214,6 +214,7 @@ export default function Footer() {
         {/* ── BOTTOM ── */}
         <div className={styles.footerBottom}>
           <p className={styles.footerCopyright}>
+            <span aria-hidden="true">{'// '}</span>
             © {currentYear} {t.footer.bottomText}
           </p>
 

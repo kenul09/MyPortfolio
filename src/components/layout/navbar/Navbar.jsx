@@ -111,6 +111,11 @@ export default function Navbar({ toggleTheme, theme }) {
             <span className={styles.logoText}>
               SK<span className={styles.logoAccent}>WEB</span>
             </span>
+            <span
+              className={`${styles.logoCursor} cursor-blink`}
+              aria-hidden="true"
+            >
+            </span>
           </a>
 
           {/* ── Desktop Nav ── */}

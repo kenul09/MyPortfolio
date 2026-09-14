@@ -190,7 +190,7 @@
 
 
 .serviceNum {
-  font-family: inherit;
+  font-family: var(--font-mono);
   font-size: 0.875rem;                /* 14px */
   line-height: 1;
   font-weight: 700;
@@ -257,8 +257,9 @@
 }
 
 /* =========================
-   TAG ITEM
-   Type: 12px / 1 / 0.02em / 500
+   TAG ITEM — code-block style
+   Type: 14px mono / 1 / 0 / 500
+   (14px minimum: monospace at 12px reads too small — WCAG legibility)
 ========================= */
 
 .serviceTag {
@@ -266,18 +267,33 @@
   align-items: center;
   justify-content: center;
   padding: 6px 12px;                  /* 8pt grid */
-  font-size: 0.75rem;                 /* 12px */
+  font-family: var(--font-mono);
+  font-size: 0.875rem;                /* 14px */
   line-height: 1;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
+  background: var(--bg-terminal);
+  border: 1px solid var(--border-code);
+  border-radius: var(--radius-sm);
   transition:
     color 0.3s ease,
     background 0.3s ease,
     border-color 0.3s ease;
+}
+
+/* Decorative JSX-tag brackets — generated content, not exposed to the
+   a11y tree, so screen readers still hear only the tag name itself. */
+.serviceTag::before {
+  content: '<';
+  margin-right: 1px;
+  opacity: 0.6;
+}
+
+.serviceTag::after {
+  content: ' />';
+  margin-left: 1px;
+  opacity: 0.6;
 }
 
 .serviceCardHovered .serviceTag {
@@ -429,7 +445,7 @@
   }
 
   .serviceTag {
-    font-size: 0.6875rem;             /* 11px */
+    font-size: 0.875rem;              /* 14px — mono legibility floor */
     padding: 5px 10px;
   }
 
@@ -509,7 +525,7 @@
   }
 
   .serviceTag {
-    font-size: 0.625rem;              /* 10px */
+    font-size: 0.875rem;              /* 14px — mono legibility floor */
     padding: 4px 8px;
   }
 

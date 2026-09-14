@@ -10,6 +10,13 @@ import styles from './Projects.module.css'
 /* ── Constants ── */
 const PROJECTS_PER_PAGE = 4
 
+const getHostname = (url) => new URL(url).hostname
+
+/* Two pairs of project cards currently reuse the same screenshot
+   (see src/translations/data.js) — this accent wash gives every card
+   a distinct identity until real per-project screenshots are added. */
+const CARD_ACCENTS = ['#6366f1', '#ec4899', '#14b8a6', '#f59e0b', '#8b5cf6']
+
 export default function Projects() {
   const { language } = useLanguage()
   const t = translations[language]
@@ -127,7 +134,11 @@ export default function Projects() {
 
         {/* ── PROJECTS GRID ── */}
         <div className={styles.projectsGrid}>
-          {paginatedProjects.map((project, index) => (
+          {paginatedProjects.map((project, index) => {
+            const globalIndex = t.projects.cards.indexOf(project)
+            const accent = CARD_ACCENTS[globalIndex % CARD_ACCENTS.length]
+
+            return (
             <a
               key={project.title + index}
               href={project.link}
@@ -135,15 +146,22 @@ export default function Projects() {
               rel="noopener noreferrer"
               className={styles.projectCard}
               aria-label={`View project: ${project.title}`}
+              style={{ '--card-accent': accent }}
             >
               {/* Image with overlay */}
               <div className={styles.projectImageWrapper}>
+                <div className="terminal-chrome" aria-hidden="true">
+                  <span className="terminal-dot terminal-dot-red" />
+                  <span className="terminal-dot terminal-dot-yellow" />
+                  <span className="terminal-dot terminal-dot-green" />
+                </div>
                 <img
                   src={project.img}
                   alt={project.title}
                   className={styles.projectImage}
                   loading="lazy"
                 />
+                <div className={styles.projectAccentWash} aria-hidden="true" />
                 <div className={styles.projectOverlay} aria-hidden="true">
                   <span className={styles.projectOverlayIcon}>
                     <svg
@@ -166,11 +184,15 @@ export default function Projects() {
 
               {/* Content */}
               <div className={styles.projectContent}>
-                <h3 className={styles.projectTitle}>{project.title}</h3>
+                <div className={styles.projectTitleRow}>
+                  <h3 className={styles.projectTitle}>{project.title}</h3>
+                  <span className={styles.projectUrl}>{getHostname(project.link)}</span>
+                </div>
                 <p className={styles.projectDesc}>{project.desc}</p>
               </div>
             </a>
-          ))}
+            )
+          })}
         </div>
 
         {/* ── PAGINATION ── */}

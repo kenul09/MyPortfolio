@@ -80,6 +80,15 @@
   background-clip: text;
 }
 
+.logoCursor {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--blue-bright);
+  line-height: 1;
+  margin-left: 1px;
+}
+
 /* =========================
    NAV LINKS (DESKTOP - PILL)
 ========================= */
@@ -115,24 +124,25 @@
   line-height: 1.2;
 }
 
-/* Non-color active cue (dot) so the active link doesn't rely on color alone */
-.navLink::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: currentColor;
+/* Non-color active cue: a monospace "> " prompt prefix — "current directory" feel.
+   Purely decorative generated content, so it isn't exposed to the a11y tree;
+   the link's real text (announced by screen readers) is unaffected. */
+.navLink::before {
+  display: inline-block;
+  width: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: currentColor;
   opacity: 0;
-  transform: translateX(-50%) scale(0);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  vertical-align: middle;
+  transition: width 0.3s ease, opacity 0.3s ease, margin-right 0.3s ease;
 }
 
-.active::after {
+.active::before {
+  width: 0.6em;
+  margin-right: 4px;
   opacity: 1;
-  transform: translateX(-50%) scale(1);
 }
 
 .navLink:hover {
@@ -348,6 +358,12 @@
   border-color: var(--blue-primary);
   color: #fff;
   box-shadow: 0 4px 14px var(--blue-glow);
+}
+
+.mobileLinkActive::before {
+  content: '> ';
+  font-family: var(--font-mono);
+  font-weight: 700;
 }
 
 .mobileLinkActive:hover {

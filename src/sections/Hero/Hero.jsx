@@ -1,10 +1,14 @@
 import { useRef } from 'react'
-
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Autoplay, EffectFade } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/effect-fade'
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiAntdesign,
+  SiCssmodules,
+  SiHtml5,
+  SiJavascript,
+} from 'react-icons/si'
 
 import Button from '../../components/ui/Button'
 import useMountAnimation from '../../hooks/useMountAnimation'
@@ -12,23 +16,84 @@ import useSmoothScroll from '../../hooks/useSmoothScroll'
 import { useLanguage } from '../../hooks'
 import { translations } from '../../translations'
 
-import slide1 from '../../assets/images/slide1.png'
-import slide2 from '../../assets/images/slide2.png'
-import slide3 from '../../assets/images/slide3.png'
+import heroCharacter from '../../assets/images/hero-character.png'
 
 import styles from './Hero.module.css'
 
-/* ── Constants ── */
-const SLIDES = [slide1, slide2, slide3]
+/* ── Orbit badge layout ──
+   Positions are computed (angle → x/y via cos/sin), not hand-placed, so
+   adding/removing a badge just means editing this array. Percent-based
+   radius (of .orbitScene, always a square) keeps it responsive without
+   any JS resize-tracking. The first two badges sit near the top of the
+   circle, which is where the character's face ends up given she's offset
+   toward (59%, 45%) — those two get a larger radius so they clear her
+   face instead of sitting on top of it.
 
-const SWIPER_CONFIG = {
-  modules: [Pagination, Autoplay, EffectFade],
-  slidesPerView: 1,
-  loop: true,
-  effect: 'fade',
-  fadeEffect: { crossFade: true },
-  autoplay: { delay: 4000, disableOnInteraction: false },
-  pagination: { clickable: true },
+   angleJitter/radiusJitter are small fixed (not random-per-render)
+   offsets so the ring of badges reads as loosely scattered rather than a
+   mechanically perfect 11-gon — same values every render, just not a
+   clean multiple of 360/11°. floatDuration/floatDelay likewise vary per
+   badge so the bob animation (see .techBadgeGroup) doesn't look
+   synchronized. */
+const BADGE_RADIUS_PCT = 47
+const BADGE_RADIUS_PCT_CLEAR_FACE = 55
+
+const TECH_BADGES = [
+  { label: 'React', Icon: SiReact, angle: -90, radius: BADGE_RADIUS_PCT_CLEAR_FACE, angleJitter: -4, radiusJitter: 1.5, floatDuration: 4.2, floatDelay: 0 },
+  { label: 'React Native', Icon: null, angle: -57, radius: BADGE_RADIUS_PCT_CLEAR_FACE, angleJitter: 5, radiusJitter: -2, floatDuration: 3.6, floatDelay: 0.4 },
+  { label: 'Next.js', Icon: SiNextdotjs, angle: -25, angleJitter: -6, radiusJitter: 2.2, floatDuration: 4.8, floatDelay: 0.9 },
+  { label: 'TypeScript', Icon: SiTypescript, angle: 8, angleJitter: 4, radiusJitter: -1.5, floatDuration: 3.3, floatDelay: 1.3 },
+  { label: 'Zustand', Icon: null, angle: 41, angleJitter: -3, radiusJitter: 2.8, floatDuration: 4.5, floatDelay: 0.2 },
+  { label: 'Tailwind CSS', Icon: SiTailwindcss, angle: 74, angleJitter: 3, radiusJitter: -2.2, floatDuration: 3.9, floatDelay: 1.7 },
+  { label: 'Ant Design', Icon: SiAntdesign, angle: 106, angleJitter: -2, radiusJitter: 1.2, floatDuration: 4.1, floatDelay: 0.6 },
+  { label: 'CSS Modules', Icon: SiCssmodules, angle: 139, angleJitter: 4, radiusJitter: -1.6, floatDuration: 3.5, floatDelay: 2.1 },
+  { label: 'UI/UX Design', Icon: null, lines: ['UI/UX', 'DESIGN'], angle: 172, angleJitter: -6, radiusJitter: 2, floatDuration: 4.4, floatDelay: 1.5 },
+  { label: 'HTML', Icon: SiHtml5, angle: 205, angleJitter: 5, radiusJitter: -1.9, floatDuration: 4.7, floatDelay: 0.3 },
+  { label: 'JavaScript', Icon: SiJavascript, angle: 237, angleJitter: -3, radiusJitter: 1.1, floatDuration: 3.8, floatDelay: 1.1 },
+]
+
+const badgeStyle = ({
+  angle,
+  angleJitter = 0,
+  radius = BADGE_RADIUS_PCT,
+  radiusJitter = 0,
+  floatDuration,
+  floatDelay,
+}) => {
+  const rad = ((angle + angleJitter) * Math.PI) / 180
+  const effectiveRadius = radius + radiusJitter
+  return {
+    left: `${50 + effectiveRadius * Math.cos(rad)}%`,
+    top: `${50 + effectiveRadius * Math.sin(rad)}%`,
+    animationDuration: `${floatDuration}s`,
+    animationDelay: `${floatDelay}s`,
+  }
+}
+
+const badgeShortLabel = (label) => {
+  const words = label.split(' ')
+  const initials = words.length === 1 ? words[0] : words.map((w) => w[0]).join('')
+  return initials.slice(0, 2).toUpperCase()
+}
+
+/* ── Orbit ring dots ──
+   Small glowing dots riding along each ring's own circumference (radius
+   is always exactly 50% of that ring's own box). They're children of the
+   ring elements, so the rings' rotation animation carries the dots with
+   it. Angles are chosen to start in the gaps between badges, though since
+   the rings rotate and the badges don't, that alignment only holds at
+   the very first frame — which is fine, it's just meant to avoid an
+   initial dot-on-top-of-badge look. */
+const OUTER_DOT_ANGLES = [-73, -8, 57, 122, 188]
+const MIDDLE_DOT_ANGLES = [-41, 24, 90, 155, 221]
+const INNER_DOT_ANGLES = [15, 105, 195, 285]
+
+const dotStyle = (angle) => {
+  const rad = (angle * Math.PI) / 180
+  return {
+    left: `${50 + 50 * Math.cos(rad)}%`,
+    top: `${50 + 50 * Math.sin(rad)}%`,
+  }
 }
 
 const SOCIAL_LINKS = [
@@ -75,10 +140,19 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className={styles.hero} id="hero">
-      {/* Decorative background — single subtle orb */}
-      <div className={styles.bgOrb} aria-hidden="true" />
+      {/* Floating rounded card — Navbar (sticky, in App.jsx) lives outside
+          and above this, so it keeps its sticky behavior untouched. */}
+      <div className={styles.heroFrame}>
+        {/* Decorative background — single subtle orb. Clipped to the
+            frame's own rounded shape via .heroFrameClip's overflow:
+            hidden, independent of .heroFrame's overflow: visible (which
+            stays visible so the character/badges can still bleed past
+            the edge). */}
+        <div className={styles.heroFrameClip} aria-hidden="true">
+          <div className={styles.bgOrb} aria-hidden="true" />
+        </div>
 
-      <div className={styles.heroInner}>
+        <div className={styles.heroInner}>
         {/* ── LEFT — Content ── */}
         <div className={styles.heroContent}>
           <p
@@ -86,6 +160,7 @@ export default function Hero() {
             style={delay('0.1s')}
           >
             <span className={styles.introDot} aria-hidden="true" />
+            <span className={styles.introPrefix} aria-hidden="true">// </span>
             {t.heroTitle}
           </p>
 
@@ -101,6 +176,14 @@ export default function Hero() {
             style={delay('0.3s')}
           >
             Frontend Developer
+          </p>
+
+          <p
+            className={`${styles.heroPrompt} ${styles.fadeInUp}`}
+            style={delay('0.35s')}
+            aria-hidden="true"
+          >
+          
           </p>
 
           <p
@@ -163,25 +246,69 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── RIGHT — Visual ── */}
+        {/* ── RIGHT — Orbital Visual ── */}
         <div
           className={`${styles.heroRight} ${styles.fadeInUp}`}
           style={delay('0.7s')}
         >
-          <div className={styles.heroVisualFrame}>
-            <Swiper {...SWIPER_CONFIG} className={styles.heroSwiper}>
-              {SLIDES.map((slide, index) => (
-                <SwiperSlide key={index}>
-                  <img
-                    src={slide}
-                    alt={`Project preview ${index + 1}`}
-                    className={styles.heroSlideImage}
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                  />
-                </SwiperSlide>
+          <div className={styles.orbitScene}>
+            {/* Rotating rings — purely decorative. Each carries a few
+                small glowing dots along its own circumference, so they
+                rotate together with the ring. */}
+            <div className={`${styles.orbitRing} ${styles.orbitRingOuter}`} aria-hidden="true">
+              {OUTER_DOT_ANGLES.map((angle) => (
+                <span key={angle} className={styles.orbitDot} style={dotStyle(angle)} />
               ))}
-            </Swiper>
+            </div>
+            <div className={`${styles.orbitRing} ${styles.orbitRingMiddle}`} aria-hidden="true">
+              {MIDDLE_DOT_ANGLES.map((angle) => (
+                <span key={angle} className={styles.orbitDot} style={dotStyle(angle)} />
+              ))}
+            </div>
+            <div className={`${styles.orbitRing} ${styles.orbitRingInner}`} aria-hidden="true">
+              {INNER_DOT_ANGLES.map((angle) => (
+                <span key={angle} className={styles.orbitDot} style={dotStyle(angle)} />
+              ))}
+            </div>
+
+            {/* Center — character */}
+            <div className={styles.characterWrapper}>
+              <img
+                src={heroCharacter}
+                alt="Konul Samadova"
+                className={styles.characterImage}
+                loading="eager"
+              />
+            </div>
+
+            {/* Static tech badges — positions computed from angle, not
+                hardcoded; do not rotate with the rings */}
+            {TECH_BADGES.map((badge) => (
+              <div
+                key={badge.label}
+                className={styles.techBadgeGroup}
+                style={badgeStyle(badge)}
+                aria-hidden="true"
+              >
+                <div className={styles.techBadge} title={badge.label}>
+                  {badge.lines ? (
+                    <span className={styles.techBadgeTwoLine}>
+                      {badge.lines.map((line) => (
+                        <span key={line}>{line}</span>
+                      ))}
+                    </span>
+                  ) : badge.Icon ? (
+                    <badge.Icon />
+                  ) : (
+                    <span className={styles.techBadgeText}>
+                      {badgeShortLabel(badge.label)}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
         </div>
       </div>
     </section>

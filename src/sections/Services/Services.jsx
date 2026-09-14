@@ -57,7 +57,7 @@ export default function Services() {
               {/* Number badge */}
               <div className={styles.serviceNumWrapper}>
                 <span className={styles.serviceNum} aria-hidden="true">
-                  {s.num}
+                  #{s.num}
                 </span>
               </div>
 

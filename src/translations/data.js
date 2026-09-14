@@ -209,7 +209,7 @@ export const translations = {
       button: 'Layihəyə Başla →',
       quickLinksTitle: 'Tez Əlaqələr',
       contactTitle: 'Əlaqə Sistemi',
-      bottomText: '©2026, SKWEB — Bütün hüquqlar qorunur',
+      bottomText: 'SKWEB — Bütün hüquqlar qorunur',
     },
     contactInfo: {
       phone: '+994 (50) 341-70-69',
@@ -422,7 +422,7 @@ export const translations = {
       button: 'Start a Project →',
       quickLinksTitle: 'Quick Links',
       contactTitle: 'Contact System',
-      bottomText: '©2026, SKWEB — All rights reserved',
+      bottomText: 'SKWEB — All rights reserved',
     },
     contactInfo: {
       phone: '+994 (50) 341-70-69',
@@ -635,7 +635,7 @@ export const translations = {
       button: 'Начать проект →',
       quickLinksTitle: 'Быстрые ссылки',
       contactTitle: 'Система контактов',
-      bottomText: '©2026, SKWEB — Все права защищены',
+      bottomText: 'SKWEB — Все права защищены',
     },
     contactInfo: {
       phone: '+994 (50) 341-70-69',
